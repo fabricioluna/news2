@@ -64,12 +64,16 @@
                     </select>
                 </div>
 
-                <div id="div-spo2-scale">
-                    <label class="block text-sm font-medium text-slate-700">Escala de SpO2 (NEWS2)</label>
+                <div id="div-spo2-scale" class="bg-white p-2 rounded border border-gray-200 shadow-sm">
+                    <label class="block text-sm font-medium text-slate-700">Escala de SpO2</label>
                     <select id="spo2-scale" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border">
                         <option value="1">Escala 1 (Padrão)</option>
-                        <option value="2">Escala 2 (Alvo 88-92% - Ex: DPOC)</option>
+                        <option value="2">Escala 2 (Retentores de CO2 - Ex: DPOC)</option>
                     </select>
+                    <div class="mt-2 text-xs text-slate-500 leading-relaxed">
+                        <span class="font-bold text-slate-600">Escala 1:</span> Pacientes sem insuficiência respiratória crônica (Alvo de O2 ≥ 96%).<br>
+                        <span class="font-bold text-slate-600">Escala 2:</span> Pacientes com diagnóstico confirmado de insuficiência respiratória hipercápnica (Alvo de O2 entre 88% e 92%).
+                    </div>
                 </div>
 
                 <div>
@@ -90,9 +94,9 @@
                         <label class="block text-sm font-medium text-slate-700">PASistólica (mmHg)</label>
                         <input type="number" id="sbp" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="Ex: 120">
                     </div>
-                    <div id="div-pad" class="hidden">
-                        <label class="block text-sm font-bold text-pink-700">PADiastólica (MEOWS)</label>
-                        <input type="number" id="dbp" class="mt-1 w-full rounded-md border-pink-300 shadow-sm p-2 border" placeholder="Ex: 80">
+                    <div id="div-pad-wrapper" class="transition-colors duration-300 rounded p-1">
+                        <label id="label-pad" class="block text-sm font-medium text-slate-700">PADiastólica (mmHg)</label>
+                        <input type="number" id="dbp" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="Ex: 80">
                     </div>
                 </div>
 
@@ -137,26 +141,26 @@
             </div>
 
             <div class="glass rounded-2xl shadow-lg p-6">
-                <h3 class="font-bold text-lg mb-4 text-blue-900 border-b pb-2">Dossiê Clínico: O Pulo do Gato 💡</h3>
+                <h3 class="font-bold text-lg mb-4 text-blue-900 border-b pb-2">Dossiê Clínico 💡</h3>
                 
                 <details class="mb-2 bg-slate-50 rounded p-2 cursor-pointer">
-                    <summary class="font-semibold text-slate-800">Por que não usar o NEWS2 para todos?</summary>
+                    <summary class="font-semibold text-slate-800">Por que há diferentes protocolos?</summary>
                     <p class="text-sm text-slate-600 mt-2">
-                        Pense no sistema cardiovascular como o motor de um veículo:<br><br>
+                        Utilizando um mnemônico de analogia automotiva para compreender o fluxo hemodinâmico:<br><br>
                         🏥 <strong>NEWS2 (Adultos):</strong> É o painel de um carro de passeio comum. Foco na falência respiratória e sepse.<br><br>
-                        👶 <strong>PEWS (Pediatria):</strong> É o painel de uma moto esportiva. Crianças entram em choque de perfusão ANTES da pressão cair, por isso monitoramos o <em>Enchimento Capilar</em> e o <em>Esforço Respiratório</em>.<br><br>
-                        🤰 <strong>MEOWS (Gestantes):</strong> É um caminhão puxando carga pesada. A <em>Pressão Diastólica</em> é o principal preditor de risco obstétrico (Pré-eclâmpsia).
+                        👶 <strong>PEWS (Pediatria):</strong> É o painel de uma moto esportiva. Crianças entram em choque de perfusão ANTES da pressão cair, por isso monitoramos rigorosamente o <em>Enchimento Capilar</em> e o <em>Esforço Respiratório</em>.<br><br>
+                        🤰 <strong>MEOWS (Gestantes):</strong> É um caminhão puxando carga pesada. A <em>Pressão Diastólica</em> é monitorada e destacada visualmente, sendo o principal preditor de risco obstétrico (ex: Pré-eclâmpsia).
                     </p>
                 </details>
 
                 <details class="mb-2 bg-slate-50 rounded p-2 cursor-pointer">
                     <summary class="font-semibold text-slate-800">O que é o NEWS2?</summary>
-                    <p class="text-sm text-slate-600 mt-2">O National Early Warning Score 2 é o padrão-ouro (adaptado transculturalmente para o Brasil) para avaliação de doenças agudas em adultos. Ele pontua parâmetros para prever o risco de deterioração clínica e parada cardíaca.</p>
+                    <p class="text-sm text-slate-600 mt-2">O National Early Warning Score 2 é o padrão-ouro (adaptado transculturalmente para o Brasil) para avaliação de doenças agudas em adultos. Ele pontua parâmetros vitais para prever o risco de deterioração clínica e parada cardíaca.</p>
                 </details>
 
                 <details class="bg-slate-50 rounded p-2 cursor-pointer">
                     <summary class="font-semibold text-slate-800">NEWS2 vs. qSOFA</summary>
-                    <p class="text-sm text-slate-600 mt-2">Enquanto o qSOFA diagnostica a sepse já instalada (quando o "carro já quebrou"), o NEWS2 acende a luz amarela precocemente, garantindo intervenções na "janela de ouro".</p>
+                    <p class="text-sm text-slate-600 mt-2">Enquanto o qSOFA diagnostica a sepse já instalada (quando a "falha" metabólica já se estabeleceu), o NEWS2 acende o alerta de risco precocemente, garantindo intervenções clínicas eficazes na chamada "janela de ouro".</p>
                 </details>
             </div>
         </section>
@@ -177,7 +181,8 @@
         const divSpo2Scale = document.getElementById('div-spo2-scale');
         const divRespEffort = document.getElementById('div-resp-effort');
         const divCrt = document.getElementById('div-crt');
-        const divPad = document.getElementById('div-pad');
+        const divPadWrapper = document.getElementById('div-pad-wrapper');
+        const labelPad = document.getElementById('label-pad');
         
         inputs.forEach(input => {
             input.addEventListener('input', updateInterfaceAndCalculate);
@@ -206,24 +211,37 @@
                 divSpo2Scale.classList.add('hidden');
                 divRespEffort.classList.remove('hidden');
                 divCrt.classList.remove('hidden');
-                divPad.classList.add('hidden');
-                divGestante.classList.add('hidden'); // Criança <16 bloqueia MEOWS visualmente
+                divGestante.classList.add('hidden'); // Criança <16 bloqueia opção gestante visualmente na triagem inicial
+                removePadHighlight();
             } else if (sexo === 'F' && gestante === 'sim') {
                 currentProtocol = 'MEOWS';
                 divSpo2Scale.classList.remove('hidden');
                 divRespEffort.classList.add('hidden');
                 divCrt.classList.add('hidden');
-                divPad.classList.remove('hidden');
+                applyPadHighlight();
             } else {
                 currentProtocol = 'NEWS2';
                 divSpo2Scale.classList.remove('hidden');
                 divRespEffort.classList.add('hidden');
                 divCrt.classList.add('hidden');
-                divPad.classList.add('hidden');
+                removePadHighlight();
             }
 
             // 3. EXECUÇÃO DO CÁLCULO
             calculateScores(currentProtocol, idade);
+        }
+
+        // Funções Auxiliares de Interface para Pressão Diastólica
+        function applyPadHighlight() {
+            divPadWrapper.classList.add('bg-pink-50', 'border', 'border-pink-300');
+            labelPad.classList.remove('text-slate-700', 'font-medium');
+            labelPad.classList.add('text-pink-700', 'font-bold');
+        }
+
+        function removePadHighlight() {
+            divPadWrapper.classList.remove('bg-pink-50', 'border', 'border-pink-300');
+            labelPad.classList.add('text-slate-700', 'font-medium');
+            labelPad.classList.remove('text-pink-700', 'font-bold');
         }
 
         function calculateScores(protocol, idade) {
@@ -322,7 +340,7 @@
             let o2Score = o2 === 'o2' ? 2 : 0;
             total += checkMax(o2Score);
 
-            // SBP
+            // SBP (A Diastólica não conta para o escore do NEWS2, por isso usamos apenas SBP no cálculo)
             let sbpScore = 0;
             if (isNaN(sbp)) isComplete = false;
             else {

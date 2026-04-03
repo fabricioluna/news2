@@ -31,6 +31,12 @@
             color: #1e3a8a !important;
             border-radius: 4px;
         }
+        
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
 <body class="bg-slate-200 min-h-screen font-sans text-slate-800 p-4 md:p-6 flex flex-col items-center">
@@ -40,21 +46,21 @@
         <p class="text-slate-600 font-medium">Sistema de Triagem: NEWS2 (Adultos) | PEWS (Pediatria) | MEOWS (Obstetrícia)</p>
     </header>
 
-    <main class="w-full max-w-6xl flex flex-col gap-6 mb-8">
+    <main class="w-full max-w-7xl flex flex-col gap-6 mb-8">
         
         <div class="grid lg:grid-cols-12 gap-6">
             
-            <section class="glass rounded-2xl shadow-lg p-6 lg:col-span-7 h-fit border-t-4 border-blue-900">
-                <h2 class="text-xl font-semibold mb-4 border-b border-slate-300 pb-2 text-blue-900">1. Perfil e Sinais Vitais</h2>
+            <section class="glass rounded-2xl shadow-lg p-6 lg:col-span-5 h-fit border-t-4 border-blue-900 transition-colors duration-500" id="form-container">
+                <h2 class="text-xl font-semibold mb-4 border-b border-slate-300 pb-2" id="form-title">1. Perfil e Sinais Vitais</h2>
                 <form id="news2-form" class="space-y-4">
                     
-                    <div class="grid grid-cols-3 gap-2 bg-blue-50 p-3 rounded-lg border border-blue-200">
+                    <div class="grid grid-cols-3 gap-2 bg-slate-100 p-3 rounded-lg border border-slate-300">
                         <div>
-                            <label class="block text-xs font-bold text-blue-900 uppercase">Idade</label>
+                            <label class="block text-xs font-bold text-slate-700 uppercase">Idade</label>
                             <input type="number" id="idade" class="mt-1 w-full rounded border-gray-300 shadow-inner p-2 border focus:ring-blue-500" placeholder="Anos" required>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-blue-900 uppercase">Sexo</label>
+                            <label class="block text-xs font-bold text-slate-700 uppercase">Sexo</label>
                             <select id="sexo" class="mt-1 w-full rounded border-gray-300 shadow-inner p-2 border">
                                 <option value="M">Masc</option>
                                 <option value="F">Fem</option>
@@ -62,7 +68,7 @@
                         </div>
                         <div id="div-gestante" class="hidden">
                             <label class="block text-xs font-bold text-pink-700 uppercase">Gestante?</label>
-                            <select id="gestante" class="mt-1 w-full rounded border-pink-300 shadow-inner p-2 border bg-pink-50">
+                            <select id="gestante" class="mt-1 w-full rounded border-pink-300 shadow-inner p-2 border bg-pink-50 focus:ring-pink-500">
                                 <option value="nao">Não</option>
                                 <option value="sim">Sim</option>
                             </select>
@@ -72,14 +78,14 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-medium text-slate-700">Frequência Respiratória</label>
-                            <input type="number" id="resp-rate" class="mt-1 w-full rounded border-gray-300 p-2 border text-center font-bold text-lg text-blue-900" placeholder="irpm">
+                            <input type="number" id="resp-rate" class="mt-1 w-full rounded border-gray-300 p-2 border text-center font-bold text-lg text-slate-700" placeholder="irpm">
                         </div>
                         <div id="div-resp-effort" class="hidden bg-purple-50 p-2 rounded border border-purple-200">
                             <label class="block text-sm font-bold text-purple-800">Esforço Respiratório</label>
-                            <select id="resp-effort" class="mt-1 w-full rounded border-gray-300 p-2 border text-center font-bold text-purple-900">
+                            <select id="resp-effort" class="mt-1 w-full rounded border-purple-300 p-2 border text-center font-bold text-purple-900">
                                 <option value="0">Normal</option>
-                                <option value="1">Retração Leve</option>
-                                <option value="2">Grave / Gemência</option>
+                                <option value="1">Retração Leve / O2</option>
+                                <option value="2">Retração Grave / Gemência</option>
                             </select>
                         </div>
                         <div id="div-spo2-scale" class="col-span-2 sm:col-span-1">
@@ -91,7 +97,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-slate-700">SpO2 (%)</label>
-                            <input type="number" id="spo2" class="mt-1 w-full rounded border-gray-300 p-2 border text-center font-bold text-lg text-blue-900" placeholder="%">
+                            <input type="number" id="spo2" class="mt-1 w-full rounded border-gray-300 p-2 border text-center font-bold text-lg text-slate-700" placeholder="%">
                         </div>
                     </div>
 
@@ -105,29 +111,29 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-slate-700">Temperatura</label>
-                            <input type="number" step="0.1" id="temp" class="mt-1 w-full rounded border-gray-300 p-2 border text-center font-bold text-lg text-blue-900" placeholder="°C">
+                            <input type="number" step="0.1" id="temp" class="mt-1 w-full rounded border-gray-300 p-2 border text-center font-bold text-lg text-slate-700" placeholder="°C">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-3 gap-2">
                         <div>
                             <label class="block text-sm font-medium text-slate-700">PASistólica</label>
-                            <input type="number" id="sbp" class="mt-1 w-full rounded border-gray-300 p-2 border text-center font-bold text-lg text-blue-900" placeholder="mmHg">
+                            <input type="number" id="sbp" class="mt-1 w-full rounded border-gray-300 p-2 border text-center font-bold text-lg text-slate-700" placeholder="mmHg">
                         </div>
                         <div id="div-pad-wrapper" class="transition-colors duration-300 rounded p-1">
                             <label id="label-pad" class="block text-sm font-medium text-slate-700">PADiastólica</label>
-                            <input type="number" id="dbp" class="mt-1 w-full rounded border-gray-300 p-2 border text-center font-bold text-lg text-blue-900" placeholder="mmHg">
+                            <input type="number" id="dbp" class="mt-1 w-full rounded border-gray-300 p-2 border text-center font-bold text-lg text-slate-700" placeholder="mmHg">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-slate-700">Freq. Cardíaca</label>
-                            <input type="number" id="hr" class="mt-1 w-full rounded border-gray-300 p-2 border text-center font-bold text-lg text-blue-900" placeholder="bpm">
+                            <input type="number" id="hr" class="mt-1 w-full rounded border-gray-300 p-2 border text-center font-bold text-lg text-slate-700" placeholder="bpm">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-4">
                         <div id="div-crt" class="hidden bg-purple-50 p-2 rounded border border-purple-200">
-                            <label class="block text-sm font-bold text-purple-800">Tempo Enchimento Capilar</label>
-                            <select id="crt" class="mt-1 w-full rounded border-gray-300 p-2 border text-center font-bold text-purple-900">
+                            <label class="block text-sm font-bold text-purple-800">Tempo Ench. Capilar</label>
+                            <select id="crt" class="mt-1 w-full rounded border-purple-300 p-2 border text-center font-bold text-purple-900">
                                 <option value="0">&le; 2 seg</option>
                                 <option value="1">3 seg</option>
                                 <option value="2">&ge; 4 seg</option>
@@ -135,7 +141,7 @@
                         </div>
                         <div class="col-span-2 sm:col-span-1">
                             <label class="block text-sm font-medium text-slate-700">Consciência / Comportamento</label>
-                            <select id="consciousness" class="mt-1 w-full rounded border-gray-300 p-2 border font-bold text-blue-900 text-center">
+                            <select id="consciousness" class="mt-1 w-full rounded border-gray-300 p-2 border font-bold text-slate-700 text-center">
                                 <option value="A">Alerta / Normal</option>
                                 <option value="C">Confusão / Irritável</option>
                                 <option value="V">Responde à Voz</option>
@@ -147,39 +153,95 @@
                 </form>
             </section>
 
-            <section class="lg:col-span-5 flex flex-col gap-4">
+            <section class="lg:col-span-7 flex flex-col gap-4">
                 
-                <div id="result-card" class="glass rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-all duration-500 bg-white border-t-4 border-slate-300">
+                <div id="result-card" class="glass rounded-2xl shadow-lg p-4 flex flex-col items-center justify-center text-center transition-all duration-500 bg-white border-t-4 border-slate-300">
                     <h2 id="protocol-title" class="text-xl font-semibold mb-1 text-slate-700">Termômetro de Risco</h2>
-                    <div id="total-score" class="text-5xl font-black text-slate-800 my-2">-</div>
-                    <div id="risk-level" class="text-lg font-bold uppercase tracking-wider text-slate-500 mb-2">Aguardando Dados</div>
+                    <div id="total-score" class="text-5xl font-black text-slate-800 my-1">-</div>
+                    <div id="risk-level" class="text-lg font-bold uppercase tracking-wider text-slate-500 mb-1">Aguardando Dados</div>
                     <p id="clinical-response" class="text-sm text-slate-600 font-medium">Preencha o perfil e os sinais vitais.</p>
                 </div>
 
-                <div class="glass rounded-2xl shadow-lg p-5 flex-grow overflow-y-auto">
-                    <h3 class="font-bold text-lg mb-3 text-blue-900 border-b border-slate-300 pb-1">Dossiê Clínico 💡</h3>
+                <div class="glass rounded-2xl shadow-lg p-5 flex-grow overflow-y-auto custom-scrollbar h-[400px]">
+                    <h3 class="font-bold text-xl mb-3 text-blue-900 border-b border-slate-300 pb-2">Dossiê Clínico de Raciocínio</h3>
                     
-                    <details class="mb-2 bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
-                        <summary class="font-semibold text-slate-800">O que é este Termômetro?</summary>
-                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-                            Ele não emite um diagnóstico (ex: "o paciente tem pneumonia"). Ele indica <strong>o quão rápido a equipe precisa correr para o leito</strong>. É um preditor de deterioração clínica que sistematiza a resposta assistencial.
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-3 mb-4 rounded text-sm text-blue-900">
+                        <p class="font-bold mb-1">Engenharia Clínica e a "Fadiga de Alarme"</p>
+                        <p>Não tentamos 'completar' o MEOWS ou o PEWS com o que falta do NEWS2. Adicionar parâmetros extras não específicos gera <em>fadiga de alarme</em>. O profissional preenche apenas o que prediz risco para aquele perfil. <strong>O PEWS foca em Perfusão/Esforço, o MEOWS foca em Pressão/Hemorragia e o NEWS2 foca em Falência Respiratória/Sepse.</strong></p>
+                    </div>
+
+                    <details class="mb-3 bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
+                        <summary class="font-semibold text-purple-800">PEWS (Pediatria): A Grande Compensadora 👶</summary>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                            Crianças mantêm a pressão arterial normal até o último segundo antes do colapso. Se você esperar a PA cair, perdeu a janela de salvamento. 
+                            <br><br><strong>O que sai:</strong> Pressão Arterial Sistólica perde protagonismo. Escala 2 de SpO2 sai (crianças raramente retêm CO2).
+                            <br><strong>O que entra (Truque de Estudo):</strong> 
+                            <br>• <em>Enchimento Capilar (TEC):</em> Se demorar > 2s, a criança está em choque, mesmo com PA normal.
+                            <br>• <em>Esforço Respiratório:</em> Afundar o peito para respirar vale mais que saturação isolada.
                         </p>
                     </details>
 
-                    <details class="mb-2 bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
-                        <summary class="font-semibold text-red-700">A "Regra do 3 Isolado" (NEWS2)</summary>
-                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-                            Se um paciente tiver todos os sinais normais, mas a Frequência Respiratória for 25 irpm (vale 3 pontos), a pontuação total será 3. Embora o total seja baixo (3 de 20), ele entra direto no nível <strong>Baixo-Médio</strong>. Um 3 isolado significa que <em>um sistema ou órgão específico está falhando gravemente</em>, exigindo avaliação médica urgente.
+                    <details class="mb-3 bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
+                        <summary class="font-semibold text-pink-700">MEOWS (Obstetrícia): O Roubo Fisiológico 🤰</summary>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                            A gestante tem até 50% a mais de sangue circulante; o útero "rouba" o débito cardíaco.
+                            <br><br><strong>O que muda:</strong> O alvo da Pressão Arterial. Uma PA de 140/90 mmHg no adulto é "moderada", mas na gestante é <em>Alerta Vermelho para Pré-eclâmpsia</em>.
+                            <br><strong>A Estrela da Tabela:</strong> A <em>Pressão Diastólica</em>. É o parâmetro mais sensível para detectar resistência dos vasos placentários, por isso é obrigatória.
                         </p>
                     </details>
-                    
-                    <details class="bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
-                        <summary class="font-semibold text-slate-800">Diferenças Pediátricas e Obstétricas</summary>
-                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">
-                            👶 <strong>PEWS:</strong> Crianças descompensam rápido. O escore avalia Perfusão (CRT) e Esforço, pois a criança entra em choque antes da pressão arterial cair.<br>
-                            🤰 <strong>MEOWS:</strong> Baseado em "gatilhos" de cor (Amarelo/Vermelho) e não apenas soma. A <em>Pressão Diastólica</em> é o gatilho-chave para pré-eclâmpsia.
+
+                    <details class="mb-3 bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
+                        <summary class="font-semibold text-red-700">A "Regra do 3 Isolado" (NEWS2) 🏥</summary>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                            O NEWS2 atua como um "termômetro de risco". Se o paciente tiver todos os sinais normais, mas a FR for 25 irpm (vale 3 pontos), a pontuação total é 3. Mesmo sendo um valor baixo (3 de 20), ele entra em risco <strong>Baixo-Médio</strong>, pois um '3 isolado' indica falência iminente de um órgão específico.
                         </p>
                     </details>
+
+                    <h4 class="font-bold text-slate-700 mt-4 mb-2">Comparativo Dinâmico de Parâmetros</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left border-collapse border border-slate-300">
+                            <thead>
+                                <tr class="bg-slate-200 text-slate-800">
+                                    <th class="p-2 border border-slate-300">Parâmetro</th>
+                                    <th class="p-2 border border-slate-300 bg-blue-100">NEWS2 (Adulto)</th>
+                                    <th class="p-2 border border-slate-300 bg-purple-100">PEWS (Criança)</th>
+                                    <th class="p-2 border border-slate-300 bg-pink-100">MEOWS (Gestante)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="p-1 border border-slate-300 font-semibold">PA Sistólica</td>
+                                    <td class="p-1 border border-slate-300 text-green-700">Sim (Foco em Baixa)</td>
+                                    <td class="p-1 border border-slate-300 text-red-500">Não (Secundário)</td>
+                                    <td class="p-1 border border-slate-300 text-green-700">Sim (Foco em Alta)</td>
+                                </tr>
+                                <tr class="bg-slate-50">
+                                    <td class="p-1 border border-slate-300 font-semibold">PA Diastólica</td>
+                                    <td class="p-1 border border-slate-300 text-red-500">Não</td>
+                                    <td class="p-1 border border-slate-300 text-red-500">Não</td>
+                                    <td class="p-1 border border-slate-300 font-bold text-pink-700">Sim (Obrigatório)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1 border border-slate-300 font-semibold">Enchimento Capilar</td>
+                                    <td class="p-1 border border-slate-300 text-red-500">Não</td>
+                                    <td class="p-1 border border-slate-300 font-bold text-purple-700">Sim (Crítico)</td>
+                                    <td class="p-1 border border-slate-300 text-red-500">Não</td>
+                                </tr>
+                                <tr class="bg-slate-50">
+                                    <td class="p-1 border border-slate-300 font-semibold">Esforço Respiratório</td>
+                                    <td class="p-1 border border-slate-300 text-red-500">Não</td>
+                                    <td class="p-1 border border-slate-300 font-bold text-purple-700">Sim (Crítico)</td>
+                                    <td class="p-1 border border-slate-300 text-red-500">Não</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-1 border border-slate-300 font-semibold">Saturação (SpO2)</td>
+                                    <td class="p-1 border border-slate-300">Sim (2 Escalas)</td>
+                                    <td class="p-1 border border-slate-300">Sim (1 Escala)</td>
+                                    <td class="p-1 border border-slate-300">Sim (1 Escala)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
@@ -292,11 +354,11 @@
                     <thead>
                         <tr class="bg-pink-700 text-white text-sm">
                             <th class="p-3 border border-pink-300 w-1/4 uppercase tracking-wide">MEOWS (Gestante)</th>
-                            <th class="p-3 border border-pink-300 w-[10%]">Vermelho (3)</th>
-                            <th class="p-3 border border-pink-300 w-[10%]">Amarelo (1/2)</th>
-                            <th class="p-3 border border-pink-300 w-[10%]">Normal (0)</th>
-                            <th class="p-3 border border-pink-300 w-[10%]">Amarelo (1/2)</th>
-                            <th class="p-3 border border-pink-300 w-[10%]">Vermelho (3)</th>
+                            <th class="p-3 border border-pink-300 w-[15%]">Gatilho Vermelho (3)</th>
+                            <th class="p-3 border border-pink-300 w-[15%]">Gatilho Amarelo (1)</th>
+                            <th class="p-3 border border-pink-300 w-[20%]">Normal (0)</th>
+                            <th class="p-3 border border-pink-300 w-[15%]">Gatilho Amarelo (1)</th>
+                            <th class="p-3 border border-pink-300 w-[15%]">Gatilho Vermelho (3)</th>
                         </tr>
                     </thead>
                     <tbody class="text-xs font-medium text-slate-700">
@@ -364,7 +426,7 @@
                 <table class="w-full text-center border-collapse border border-purple-300 shadow-sm bg-white">
                     <thead>
                         <tr class="bg-purple-800 text-white text-sm">
-                            <th class="p-3 border border-purple-300 w-1/4 uppercase tracking-wide">PEWS (Pediatria Básica)</th>
+                            <th class="p-3 border border-purple-300 w-1/4 uppercase tracking-wide">PEWS (Pediatria)</th>
                             <th class="p-3 border border-purple-300 w-[18%]">Verde (0)</th>
                             <th class="p-3 border border-purple-300 w-[18%]">Amarelo (1)</th>
                             <th class="p-3 border border-purple-300 w-[18%]">Laranja (2)</th>
@@ -380,14 +442,14 @@
                             <td id="p-cvp-3" class="p-2 border border-purple-300 bg-red-300">Inconsciente / Dor</td>
                         </tr>
                         <tr>
-                            <td class="p-2 border border-purple-300 bg-purple-100 text-purple-900 text-left font-bold">Cardiovascular (CRT)</td>
+                            <td class="p-2 border border-purple-300 bg-purple-100 text-purple-900 text-left font-bold">Enchimento Capilar (TEC)</td>
                             <td id="p-crt-0" class="p-2 border border-purple-300">Corado (&le; 2 seg)</td>
                             <td id="p-crt-1" class="p-2 border border-purple-300 bg-yellow-100">Pálido (3 seg)</td>
                             <td id="p-crt-2" class="p-2 border border-purple-300 bg-orange-200">Cianótico (&ge; 4 seg)</td>
                             <td id="p-crt-3" class="p-2 border border-purple-300 bg-red-300">Moteado / Taquicardia severa</td>
                         </tr>
                         <tr>
-                            <td class="p-2 border border-purple-300 bg-purple-100 text-purple-900 text-left font-bold">Respiratório (Esforço)</td>
+                            <td class="p-2 border border-purple-300 bg-purple-100 text-purple-900 text-left font-bold">Esforço Respiratório</td>
                             <td id="p-re-0" class="p-2 border border-purple-300">Sem esforço</td>
                             <td id="p-re-1" class="p-2 border border-purple-300 bg-yellow-100">Retração Leve / Uso O2</td>
                             <td id="p-re-2" class="p-2 border border-purple-300 bg-orange-200">Retração Grave / Gemência</td>
@@ -416,7 +478,9 @@
             respEffort: document.getElementById('div-resp-effort'),
             crt: document.getElementById('div-crt'),
             padWrapper: document.getElementById('div-pad-wrapper'),
-            labelPad: document.getElementById('label-pad')
+            labelPad: document.getElementById('label-pad'),
+            formContainer: document.getElementById('form-container'),
+            formTitle: document.getElementById('form-title')
         };
         
         const tables = {
@@ -463,8 +527,12 @@
                 ui.respEffort.classList.remove('hidden');
                 ui.crt.classList.remove('hidden');
                 ui.gestante.classList.add('hidden'); 
+                
                 ui.padWrapper.classList.remove('bg-pink-50', 'border', 'border-pink-300');
                 ui.labelPad.className = 'block text-sm font-medium text-slate-700';
+                
+                ui.formContainer.className = "glass rounded-2xl shadow-lg p-6 lg:col-span-5 h-fit border-t-4 border-purple-800 transition-colors duration-500";
+                ui.formTitle.className = "text-xl font-semibold mb-4 border-b border-slate-300 pb-2 text-purple-800";
                 
                 tables.news.classList.add('hidden');
                 tables.meows.classList.add('hidden');
@@ -481,6 +549,9 @@
                 ui.padWrapper.classList.add('bg-pink-50', 'border', 'border-pink-300');
                 ui.labelPad.className = 'block text-sm font-bold text-pink-700';
                 
+                ui.formContainer.className = "glass rounded-2xl shadow-lg p-6 lg:col-span-5 h-fit border-t-4 border-pink-700 transition-colors duration-500";
+                ui.formTitle.className = "text-xl font-semibold mb-4 border-b border-slate-300 pb-2 text-pink-700";
+                
                 tables.news.classList.add('hidden');
                 tables.pews.classList.add('hidden');
                 tables.meows.classList.remove('hidden');
@@ -491,8 +562,12 @@
                 ui.spo2Scale.classList.remove('hidden');
                 ui.respEffort.classList.add('hidden');
                 ui.crt.classList.add('hidden');
+                
                 ui.padWrapper.classList.remove('bg-pink-50', 'border', 'border-pink-300');
                 ui.labelPad.className = 'block text-sm font-medium text-slate-700';
+                
+                ui.formContainer.className = "glass rounded-2xl shadow-lg p-6 lg:col-span-5 h-fit border-t-4 border-blue-900 transition-colors duration-500";
+                ui.formTitle.className = "text-xl font-semibold mb-4 border-b border-slate-300 pb-2 text-blue-900";
                 
                 tables.pews.classList.add('hidden');
                 tables.meows.classList.add('hidden');
@@ -516,7 +591,7 @@
                 scoreDiv.innerText = '-';
                 riskDiv.innerText = 'Aguardando Perfil';
                 respDiv.innerText = 'Preencha Idade e Sexo para calibrar o protocolo.';
-                card.className = "glass rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-all duration-500 bg-white border-t-4 border-slate-300";
+                card.className = "glass rounded-2xl shadow-lg p-4 flex flex-col items-center justify-center text-center transition-all duration-500 bg-white border-t-4 border-slate-300";
                 tables.news.classList.add('hidden');
                 return;
             }
@@ -539,16 +614,14 @@
             if (protocol === 'NEWS2') {
                 title.innerText = "Termômetro NEWS2";
                 let total = 0;
-                let hasRedScore = false; // "Regra do 3 Isolado"
+                let hasRedScore = false; 
 
-                // RR
                 if (!isNaN(rr)) {
                     let sc = 0; let id = '';
                     if(rr<=8){sc=3; id='n-rr-3L'} else if(rr<=11){sc=1; id='n-rr-1L'} else if(rr<=20){sc=0; id='n-rr-0'} else if(rr<=24){sc=2; id='n-rr-2R'} else{sc=3; id='n-rr-3R'}
                     total += sc; if(sc===3) hasRedScore = true; setHighlight(id);
                 } else isComplete = false;
 
-                // SpO2
                 if(scale === '1') {
                     document.getElementById('row-spo2-1').classList.remove('opacity-40');
                     document.getElementById('row-spo2-2').classList.add('opacity-40');
@@ -570,47 +643,42 @@
                     total += sc; if(sc===3) hasRedScore = true; setHighlight(id);
                 } else isComplete = false;
 
-                // O2
                 if(o2 === 'o2') { total += 2; setHighlight('n-o2-2L'); } else setHighlight('n-o2-0');
 
-                // SBP
                 if (!isNaN(sbp)) {
                     let sc = 0; let id = '';
                     if(sbp<=90){sc=3; id='n-sbp-3L'} else if(sbp<=100){sc=2; id='n-sbp-2L'} else if(sbp<=110){sc=1; id='n-sbp-1L'} else if(sbp<=219){sc=0; id='n-sbp-0'} else{sc=3; id='n-sbp-3R'}
                     total += sc; if(sc===3) hasRedScore = true; setHighlight(id);
                 } else isComplete = false;
 
-                // HR
                 if (!isNaN(hr)) {
                     let sc = 0; let id = '';
                     if(hr<=40){sc=3; id='n-hr-3L'} else if(hr<=50){sc=1; id='n-hr-1L'} else if(hr<=90){sc=0; id='n-hr-0'} else if(hr<=110){sc=1; id='n-hr-1R'} else if(hr<=130){sc=2; id='n-hr-2R'} else{sc=3; id='n-hr-3R'}
                     total += sc; if(sc===3) hasRedScore = true; setHighlight(id);
                 } else isComplete = false;
 
-                // CVP
                 if(cvpu === 'A') { setHighlight('n-cvp-0'); } else { total += 3; hasRedScore = true; setHighlight('n-cvp-3R'); }
 
-                // Temp
                 if (!isNaN(temp)) {
                     let sc = 0; let id = '';
                     if(temp<=35){sc=3; id='n-tp-3L'} else if(temp<=36){sc=1; id='n-tp-1L'} else if(temp<=38){sc=0; id='n-tp-0'} else if(temp<=39){sc=1; id='n-tp-1R'} else{sc=2; id='n-tp-2R'}
                     total += sc; if(sc===3) hasRedScore = true; setHighlight(id);
                 } else isComplete = false;
 
-                if (!isComplete) { showIncomplete('🏥', 'Preencha os sinais vitais para calcular o risco.', card, scoreDiv, riskDiv, respDiv); return; }
+                if (!isComplete) { showIncomplete('🏥', 'Preencha todos os campos do NEWS2.', card, scoreDiv, riskDiv, respDiv); return; }
 
                 scoreDiv.innerHTML = `${total} <span class="text-3xl">🏥</span>`;
 
                 if (total >= 7) {
-                    setCardState(card, riskDiv, respDiv, 'red-50', 'red-500', 'red-700', 'ALTO', 'Emergência Clínica: Acionamento do Time de Resposta Rápida (TRR) ou UTI. Monitoramento contínuo.');
+                    setCardState(card, riskDiv, respDiv, 'red-50', 'red-500', 'red-700', 'ALTO', 'Emergência: Acionar TRR ou UTI imediatamente.');
                 } else if (total >= 5 || total === 6) {
-                    setCardState(card, riskDiv, respDiv, 'orange-50', 'orange-500', 'orange-700', 'MÉDIO', 'Gatilho de Urgência: Avaliação médica imediata. Frequentemente início do "Protocolo de Sepse". Monitoramento horário.');
+                    setCardState(card, riskDiv, respDiv, 'orange-50', 'orange-500', 'orange-700', 'MÉDIO', 'Urgência: Avaliação médica imediata (Protocolo Sepse).');
                 } else if (hasRedScore) {
-                    setCardState(card, riskDiv, respDiv, 'yellow-50', 'yellow-500', 'yellow-700', 'BAIXO-MÉDIO', 'Alerta Vermelho Local (Regra do 3): Avaliação urgente por enfermeiro ou médico júnior para decidir se escala o cuidado.');
+                    setCardState(card, riskDiv, respDiv, 'yellow-50', 'yellow-500', 'yellow-700', 'BAIXO-MÉDIO', 'Alerta Vermelho: Avaliação médica para 1 parâmetro crítico (Regra do 3).');
                 } else if (total >= 1 && total <= 4) {
-                    setCardState(card, riskDiv, respDiv, 'yellow-50', 'yellow-400', 'yellow-700', 'BAIXO', 'Avaliação por enfermeiro graduado; decidir se aumenta frequência de monitoramento.');
+                    setCardState(card, riskDiv, respDiv, 'yellow-50', 'yellow-400', 'yellow-700', 'BAIXO', 'Atenção: Aumentar frequência de sinais vitais.');
                 } else {
-                    setCardState(card, riskDiv, respDiv, 'green-50', 'green-500', 'green-700', 'NULO', 'Monitoramento de rotina (mínimo a cada 12 horas).');
+                    setCardState(card, riskDiv, respDiv, 'green-50', 'green-500', 'green-700', 'NULO', 'Monitoramento clínico de rotina (12/12h).');
                 }
             } 
             else if (protocol === 'MEOWS') {
@@ -620,63 +688,56 @@
 
                 const checkMeows = (val) => { if(val===3) reds++; else if(val===1 || val===2) yellows++; }
 
-                // RR
                 if (!isNaN(rr)) {
                     let sc = 0; let id = '';
                     if(rr<=10){sc=3; id='m-rr-3L'} else if(rr<=14){sc=0; id='m-rr-0'} else if(rr<=25){sc=1; id='m-rr-A'} else{sc=3; id='m-rr-3R'}
                     checkMeows(sc); setHighlight(id);
                 } else isComplete = false;
 
-                // SpO2
                 if (!isNaN(spo2)) {
                     let sc = 0; let id = '';
                     if(spo2<=91){sc=3; id='m-sp-3L'} else if(spo2<=95){sc=1; id='m-sp-A'} else{sc=0; id='m-sp-0'}
                     checkMeows(sc); setHighlight(id);
                 } else isComplete = false;
 
-                // SBP
                 if (!isNaN(sbp)) {
                     let sc = 0; let id = '';
                     if(sbp<=89){sc=3; id='m-sbp-3L'} else if(sbp<=139){sc=0; id='m-sbp-0'} else if(sbp<=159){sc=1; id='m-sbp-A'} else{sc=3; id='m-sbp-3R'}
                     checkMeows(sc); setHighlight(id);
                 } else isComplete = false;
                 
-                // DBP
                 if (!isNaN(dbp)) {
                     let sc = 0; let id = '';
                     if(dbp<=50){sc=1; id='m-dbp-A1'} else if(dbp<=89){sc=0; id='m-dbp-0'} else if(dbp<=109){sc=1; id='m-dbp-A2'} else{sc=3; id='m-dbp-3R'}
                     checkMeows(sc); setHighlight(id);
                 } else isComplete = false;
 
-                // HR
                 if (!isNaN(hr)) {
                     let sc = 0; let id = '';
                     if(hr<=40){sc=3; id='m-hr-3L'} else if(hr<=49){sc=1; id='m-hr-A1'} else if(hr<=89){sc=0; id='m-hr-0'} else if(hr<=129){sc=1; id='m-hr-A2'} else{sc=3; id='m-hr-3R'}
                     checkMeows(sc); setHighlight(id);
                 } else isComplete = false;
 
-                // Temp
                 if (!isNaN(temp)) {
                     let sc = 0; let id = '';
                     if(temp<35){sc=3; id='m-tp-3L'} else if(temp<=36){sc=1; id='m-tp-A1'} else if(temp<=37.4){sc=0; id='m-tp-0'} else if(temp<=37.9){sc=1; id='m-tp-A2'} else{sc=3; id='m-tp-3R'}
                     checkMeows(sc); setHighlight(id);
                 } else isComplete = false;
                 
-                // CVP
                 if(cvpu === 'A') { setHighlight('m-cvp-0'); } else { reds++; setHighlight('m-cvp-3R'); }
 
-                if (!isComplete) { showIncomplete('🤰', 'Preencha os sinais vitais para calcular os gatilhos.', card, scoreDiv, riskDiv, respDiv); return; }
+                if (!isComplete) { showIncomplete('🤰', 'Preencha os sinais vitais para calcular os gatilhos maternos.', card, scoreDiv, riskDiv, respDiv); return; }
 
                 scoreDiv.innerHTML = `${reds}R ${yellows}A <span class="text-3xl">🤰</span>`;
 
                 if (reds >= 2) {
-                    setCardState(card, riskDiv, respDiv, 'red-50', 'red-500', 'red-700', 'CÓDIGO VERMELHO', 'Perigo: Ativação de protocolo de emergência obstétrica imediata.');
+                    setCardState(card, riskDiv, respDiv, 'red-50', 'red-500', 'red-700', 'CÓDIGO VERMELHO', 'Perigo: Protocolo de emergência obstétrica imediata.');
                 } else if (reds === 1 || yellows >= 2) {
-                    setCardState(card, riskDiv, respDiv, 'orange-50', 'orange-500', 'orange-700', 'URGENTE', 'Avaliação médica urgente. Rastrear ativamente risco de hemorragia ou pré-eclâmpsia.');
+                    setCardState(card, riskDiv, respDiv, 'orange-50', 'orange-500', 'orange-700', 'URGENTE', 'Avaliação médica urgente. Rastrear hemorragia ou pré-eclâmpsia.');
                 } else if (yellows === 1) {
-                    setCardState(card, riskDiv, respDiv, 'yellow-50', 'yellow-400', 'yellow-700', 'OBSERVAÇÃO', 'Gatilho Amarelo: Repetir aferição de sinais vitais em 30 a 60 minutos.');
+                    setCardState(card, riskDiv, respDiv, 'yellow-50', 'yellow-400', 'yellow-700', 'OBSERVAÇÃO', 'Gatilho Amarelo: Repetir aferição em 30 a 60 minutos.');
                 } else {
-                    setCardState(card, riskDiv, respDiv, 'green-50', 'green-500', 'green-700', 'NORMAL', 'Sinais vitais normais para alterações fisiológicas da gestação.');
+                    setCardState(card, riskDiv, respDiv, 'green-50', 'green-500', 'green-700', 'NORMAL', 'Sinais vitais normais para a hemodinâmica da gestação.');
                 }
             }
             else if (protocol === 'PEWS') {
@@ -694,11 +755,11 @@
                 scoreDiv.innerHTML = `${total} <span class="text-3xl">👶</span>`;
 
                 if (total >= 5) {
-                    setCardState(card, riskDiv, respDiv, 'red-50', 'red-500', 'red-700', 'PERIGO', 'Avaliação médica imediata. Acionar suporte avançado. Possível transferência para UTI pediátrica.');
+                    setCardState(card, riskDiv, respDiv, 'red-50', 'red-500', 'red-700', 'PERIGO', 'Avaliação médica imediata. Acionar suporte avançado (UTIP).');
                 } else if (total >= 3 && total <= 4) {
-                    setCardState(card, riskDiv, respDiv, 'yellow-50', 'yellow-500', 'yellow-700', 'ALERTA', 'Aumentar a frequência de aferição de sinais vitais e avisar o enfermeiro responsável ou médico assistente.');
+                    setCardState(card, riskDiv, respDiv, 'yellow-50', 'yellow-500', 'yellow-700', 'ALERTA', 'Aumentar a frequência de aferição e avisar o médico assistente.');
                 } else {
-                    setCardState(card, riskDiv, respDiv, 'green-50', 'green-500', 'green-700', 'ESTÁVEL', 'Situação estável. Manter observação padrão conforme a rotina da idade.');
+                    setCardState(card, riskDiv, respDiv, 'green-50', 'green-500', 'green-700', 'ESTÁVEL', 'Situação estável. Manter observação padrão para a idade.');
                 }
             }
         }
@@ -707,13 +768,13 @@
             scoreDiv.innerHTML = `<span class="text-5xl text-slate-400">${icon}</span>`;
             riskDiv.innerText = 'Calculando...';
             respDiv.innerText = msg;
-            card.className = "glass rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-all duration-500 bg-slate-50 border-t-4 border-slate-300";
+            card.className = "glass rounded-2xl shadow-lg p-4 flex flex-col items-center justify-center text-center transition-all duration-500 bg-slate-50 border-t-4 border-slate-300";
         }
 
         function setCardState(card, riskDiv, respDiv, bg, border, text, riskStr, msgStr) {
-            card.className = `glass rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-all duration-500 bg-${bg} border-t-4 border-${border}`;
+            card.className = `glass rounded-2xl shadow-lg p-4 flex flex-col items-center justify-center text-center transition-all duration-500 bg-${bg} border-t-4 border-${border}`;
             riskDiv.innerText = riskStr;
-            riskDiv.className = `text-lg font-bold uppercase tracking-wider text-${text} mb-2`;
+            riskDiv.className = `text-lg font-bold uppercase tracking-wider text-${text} mb-1`;
             respDiv.innerText = msgStr;
         }
     </script>

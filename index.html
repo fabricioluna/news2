@@ -130,7 +130,7 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 gap-4">
                         <div id="div-crt" class="hidden bg-purple-50 p-2 rounded border border-purple-200">
                             <label class="block text-sm font-bold text-purple-800">Enchimento Capilar (TEC)</label>
                             <select id="crt" class="mt-1 w-full rounded border-purple-300 p-2 border text-center font-bold text-purple-900">
@@ -139,11 +139,11 @@
                                 <option value="2">&ge; 4 seg</option>
                             </select>
                         </div>
-                        <div class="col-span-2 sm:col-span-1">
-                            <label class="block text-sm font-medium text-slate-700">Consciência / Comportamento</label>
-                            <select id="consciousness" class="mt-1 w-full rounded border-gray-300 p-2 border font-bold text-slate-700 text-center">
-                                <option value="A">Alerta / Normal</option>
-                                <option value="C">Confusão / Irritável</option>
+                        <div>
+                            <label id="label-cvpu" class="block text-sm font-medium text-slate-700">Consciência / Comportamento</label>
+                            <select id="consciousness" class="mt-1 w-full rounded border-gray-300 p-2 border font-bold text-slate-700 text-center transition-all duration-300">
+                                <option value="A">Alerta</option>
+                                <option value="C">Confusão Aguda (Nova)</option>
                                 <option value="V">Responde à Voz</option>
                                 <option value="P">Responde à Dor</option>
                                 <option value="U">Inconsciente</option>
@@ -163,14 +163,24 @@
                 </div>
 
                 <div class="glass rounded-2xl shadow-lg p-5 flex-grow overflow-y-auto custom-scrollbar h-[400px]">
-                    <h3 class="font-bold text-xl mb-4 text-blue-900 border-b border-slate-300 pb-2">Dossiê Clínico de Raciocínio</h3>
+                    <h3 class="font-bold text-xl mb-3 text-blue-900 border-b border-slate-300 pb-2">Dossiê Clínico de Raciocínio</h3>
+
+                    <details class="mb-3 bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
+                        <summary class="font-semibold text-slate-800">Avaliação Neurológica por Perfil</summary>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                            A alteração do nível de consciência é um dos primeiros sinais de que o cérebro sofre por hipóxia ou toxinas (sepse). A abordagem muda radicalmente:<br><br>
+                            🏥 <strong>NEWS2 (Adultos) - A Escala ACVPU:</strong> A adição do "C" (Confusão Aguda) é vital. Um paciente acordado, mas subitamente confuso, ganha 3 pontos diretos (Alerta Vermelho).<br>
+                            🤰 <strong>MEOWS (Gestantes) - AVPU + Confusão:</strong> Simplificada, mas vigilante para a pré-eclâmpsia. Agitação/Confusão pontua 1 (Amarelo).<br>
+                            👶 <strong>PEWS (Crianças) - Comportamento:</strong> Não perguntamos a um bebê se ele está confuso. Avaliamos a interação. Irritável e inconsolável = 1 ponto; Letárgico = 2 pontos.
+                        </p>
+                    </details>
 
                     <details class="mb-3 bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
                         <summary class="font-semibold text-purple-800">PEWS (Pediatria): A Grande Compensadora 👶</summary>
                         <p class="text-sm text-slate-600 mt-2 leading-relaxed">
                             Crianças mantêm a pressão arterial normal até o último segundo antes do colapso. Se esperar a PA cair, a janela de salvamento foi perdida. O foco está na Perfusão e no Esforço Respiratório.
                             <br><br><strong>O que sai:</strong> Pressão Arterial Sistólica perde protagonismo. Escala 2 de SpO2 sai (crianças raramente retêm CO2).
-                            <br><strong>O que entra:</strong> 
+                            <br><strong>Dica de Ouro:</strong> 
                             <br>• <em>Enchimento Capilar (TEC):</em> Se demorar > 2s, a criança está em choque, mesmo com PA normal.
                             <br>• <em>Esforço Respiratório:</em> Retrações e uso de musculatura acessória valem mais que saturação isolada.
                         </p>
@@ -179,16 +189,16 @@
                     <details class="mb-3 bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
                         <summary class="font-semibold text-pink-700">MEOWS (Obstetrícia): O Roubo Fisiológico 🤰</summary>
                         <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                            A gestante tem até 50% a mais de sangue circulante; o útero "rouba" o débito cardíaco. O foco principal é a deteção de Pressão elevada e risco de Hemorragia.
+                            A gestante tem até 50% a mais de sangue circulante; o útero "rouba" o débito cardíaco. O foco principal é a detecção de Pressão elevada e risco de Hemorragia.
                             <br><br><strong>O que muda:</strong> O alvo da Pressão Arterial. Uma PA de 140/90 mmHg no adulto é "moderada", mas na gestante é <em>Alerta Vermelho para Pré-eclâmpsia</em>.
-                            <br><strong>A Estrela da Tabela:</strong> A <em>Pressão Diastólica</em>. É o parâmetro mais sensível para detetar resistência dos vasos placentários, sendo obrigatória.
+                            <br><strong>A Estrela da Tabela:</strong> A <em>Pressão Diastólica</em>. É o parâmetro mais sensível para detectar resistência dos vasos placentários, sendo obrigatória.
                         </p>
                     </details>
 
                     <details class="mb-3 bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
                         <summary class="font-semibold text-red-700">A "Regra do 3 Isolado" (NEWS2) 🏥</summary>
                         <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                            O NEWS2 (focado em Falência Respiratória e Sepse) atua como um "termômetro de risco". Se o paciente tiver todos os sinais normais, mas a FR for 25 irpm (vale 3 pontos), a pontuação total é 3. Mesmo sendo um valor baixo (3 de 20), ele entra em risco <strong>Baixo-Médio</strong>, pois um '3 isolado' indica falência iminente de um órgão específico.
+                            O NEWS2 atua como um "termômetro de risco". Se o paciente tiver todos os sinais normais, mas a FR for 25 irpm (vale 3 pontos), a pontuação total é 3. Mesmo sendo um valor baixo (3 de 20), ele entra em risco <strong>Baixo-Médio</strong>, pois um '3 isolado' indica falência iminente de um órgão específico.
                         </p>
                     </details>
 
@@ -321,7 +331,7 @@
                             <td id="n-hr-3R" class="p-2 border border-slate-300 bg-red-300">&ge; 131</td>
                         </tr>
                         <tr>
-                            <td class="p-2 border border-slate-300 bg-blue-700 text-white text-left font-bold">Consciência</td>
+                            <td class="p-2 border border-slate-300 bg-blue-700 text-white text-left font-bold">Consciência (ACVPU)</td>
                             <td class="p-2 border border-slate-300 bg-red-300"></td>
                             <td class="p-2 border border-slate-300 bg-orange-200"></td>
                             <td class="p-2 border border-slate-300 bg-yellow-100"></td>
@@ -406,12 +416,12 @@
                             <td id="m-tp-3R" class="p-2 border border-pink-300 bg-red-300">&ge; 38</td>
                         </tr>
                         <tr>
-                            <td class="p-2 border border-pink-300 bg-pink-100 text-pink-900 text-left font-bold">Consciência</td>
+                            <td class="p-2 border border-pink-300 bg-pink-100 text-pink-900 text-left font-bold">Consciência (AVPU)</td>
                             <td class="p-2 border border-pink-300 bg-red-300"></td>
                             <td class="p-2 border border-pink-300 bg-yellow-100"></td>
                             <td id="m-cvp-0" class="p-2 border border-pink-300">Alerta</td>
-                            <td class="p-2 border border-pink-300 bg-yellow-100"></td>
-                            <td id="m-cvp-3R" class="p-2 border border-pink-300 bg-red-300">C/V/P/U</td>
+                            <td id="m-cvp-A" class="p-2 border border-pink-300 bg-yellow-100">Confusa / Agitada</td>
+                            <td id="m-cvp-3R" class="p-2 border border-pink-300 bg-red-300">V / P / U</td>
                         </tr>
                     </tbody>
                 </table>
@@ -431,9 +441,9 @@
                     <tbody class="text-xs font-medium text-slate-700">
                         <tr>
                             <td class="p-2 border border-purple-300 bg-purple-100 text-purple-900 text-left font-bold">Comportamento</td>
-                            <td id="p-cvp-0" class="p-2 border border-purple-300">Normal / Brincando</td>
+                            <td id="p-cvp-0" class="p-2 border border-purple-300">Brincando / Ativo</td>
                             <td id="p-cvp-1" class="p-2 border border-purple-300 bg-yellow-100">Irritável (consolável)</td>
-                            <td id="p-cvp-2" class="p-2 border border-purple-300 bg-orange-200">Letárgico / Confuso</td>
+                            <td id="p-cvp-2" class="p-2 border border-purple-300 bg-orange-200">Letárgico</td>
                             <td id="p-cvp-3" class="p-2 border border-purple-300 bg-red-300">Inconsciente / Dor</td>
                         </tr>
                         <tr>
@@ -475,7 +485,9 @@
             padWrapper: document.getElementById('div-pad-wrapper'),
             labelPad: document.getElementById('label-pad'),
             formContainer: document.getElementById('form-container'),
-            formTitle: document.getElementById('form-title')
+            formTitle: document.getElementById('form-title'),
+            cvpuLabel: document.getElementById('label-cvpu'),
+            cvpuSelect: document.getElementById('consciousness')
         };
         
         const tables = {
@@ -499,6 +511,48 @@
             const cell = document.getElementById(id);
             if (cell) cell.classList.add('highlight-cell');
         }
+
+        // Função para atualizar dinamicamente o select de Consciência
+        function updateConsciousnessDropdown(protocol) {
+            const currentVal = ui.cvpuSelect.value;
+            
+            if (protocol === 'PEWS') {
+                ui.cvpuLabel.innerText = "Comportamento (Criança)";
+                ui.cvpuSelect.innerHTML = `
+                    <option value="A">Brincando / Ativo</option>
+                    <option value="I">Irritável (Inconsolável)</option>
+                    <option value="L">Letárgico / Resposta reduzida</option>
+                    <option value="U">Inconsciente / Apenas dor</option>
+                `;
+            } else if (protocol === 'MEOWS') {
+                ui.cvpuLabel.innerText = "Consciência (Gestante)";
+                ui.cvpuSelect.innerHTML = `
+                    <option value="A">Alerta e Orientada</option>
+                    <option value="C">Confusa / Agitada</option>
+                    <option value="U">Responde à Voz / Dor / Inconsciente</option>
+                `;
+            } else {
+                ui.cvpuLabel.innerText = "Consciência (ACVPU)";
+                ui.cvpuSelect.innerHTML = `
+                    <option value="A">Alerta</option>
+                    <option value="C">Confusão Aguda (Nova)</option>
+                    <option value="V">Responde à Voz</option>
+                    <option value="P">Responde à Dor</option>
+                    <option value="U">Inconsciente</option>
+                `;
+            }
+            
+            // Tenta manter o valor selecionado se ele ainda existir na nova lista
+            const optionsArray = Array.from(ui.cvpuSelect.options).map(opt => opt.value);
+            if (optionsArray.includes(currentVal)) {
+                ui.cvpuSelect.value = currentVal;
+            } else {
+                ui.cvpuSelect.value = 'A'; // Default para seguro
+            }
+        }
+
+        // Variável de estado para evitar re-renderizações infinitas do dropdown
+        let lastProtocol = '';
 
         function runCalculations() {
             clearAllHighlights();
@@ -569,6 +623,11 @@
                 if (!isNaN(idade)) tables.news.classList.remove('hidden');
                 tables.title.innerText = '2. Matriz NEWS2 (Adultos)';
                 tables.title.className = 'text-xl font-semibold mb-4 border-b border-slate-300 pb-2 text-blue-900';
+            }
+
+            if (protocol !== lastProtocol) {
+                updateConsciousnessDropdown(protocol);
+                lastProtocol = protocol;
             }
 
             processScores(protocol, idade);
@@ -669,7 +728,7 @@
                 } else if (total >= 5 || total === 6) {
                     setCardState(card, riskDiv, respDiv, 'orange-50', 'orange-500', 'orange-700', 'MÉDIO', 'Urgência: Avaliação médica imediata (Protocolo Sepse).');
                 } else if (hasRedScore) {
-                    setCardState(card, riskDiv, respDiv, 'yellow-50', 'yellow-500', 'yellow-700', 'BAIXO-MÉDIO', 'Alerta Vermelho: Avaliação médica para 1 parâmetro crítico (Regra do 3).');
+                    setCardState(card, riskDiv, respDiv, 'yellow-50', 'yellow-500', 'yellow-700', 'BAIXO-MÉDIO', 'Alerta Vermelho: Avaliação médica urgente para 1 parâmetro crítico (Regra do 3).');
                 } else if (total >= 1 && total <= 4) {
                     setCardState(card, riskDiv, respDiv, 'yellow-50', 'yellow-400', 'yellow-700', 'BAIXO', 'Atenção: Aumentar frequência de sinais vitais.');
                 } else {
@@ -719,7 +778,13 @@
                     checkMeows(sc); setHighlight(id);
                 } else isComplete = false;
                 
-                if(cvpu === 'A') { setHighlight('m-cvp-0'); } else { reds++; setHighlight('m-cvp-3R'); }
+                if(cvpu === 'A') { 
+                    setHighlight('m-cvp-0'); 
+                } else if(cvpu === 'C') { 
+                    yellows++; setHighlight('m-cvp-A'); 
+                } else { 
+                    reds++; setHighlight('m-cvp-3R'); 
+                }
 
                 if (!isComplete) { showIncomplete('🤰', 'Preencha os sinais vitais para calcular os gatilhos maternos.', card, scoreDiv, riskDiv, respDiv); return; }
 
@@ -728,7 +793,7 @@
                 if (reds >= 2) {
                     setCardState(card, riskDiv, respDiv, 'red-50', 'red-500', 'red-700', 'CÓDIGO VERMELHO', 'Perigo: Protocolo de emergência obstétrica imediata.');
                 } else if (reds === 1 || yellows >= 2) {
-                    setCardState(card, riskDiv, respDiv, 'orange-50', 'orange-500', 'orange-700', 'URGENTE', 'Avaliação médica urgente. Rastrear hemorragia ou pré-eclâmpsia.');
+                    setCardState(card, riskDiv, respDiv, 'orange-50', 'orange-500', 'orange-700', 'URGENTE', 'Avaliação médica urgente. Rastrear ativamente hemorragia ou pré-eclâmpsia.');
                 } else if (yellows === 1) {
                     setCardState(card, riskDiv, respDiv, 'yellow-50', 'yellow-400', 'yellow-700', 'OBSERVAÇÃO', 'Gatilho Amarelo: Repetir aferição em 30 a 60 minutos.');
                 } else {
@@ -740,8 +805,8 @@
                 let total = 0;
                 
                 if(cvpu === 'A') { total += 0; setHighlight('p-cvp-0'); } 
-                else if(cvpu === 'C') { total += 1; setHighlight('p-cvp-1'); }
-                else if(cvpu === 'V') { total += 2; setHighlight('p-cvp-2'); }
+                else if(cvpu === 'I') { total += 1; setHighlight('p-cvp-1'); }
+                else if(cvpu === 'L') { total += 2; setHighlight('p-cvp-2'); }
                 else { total += 3; setHighlight('p-cvp-3'); }
                 
                 total += crt; setHighlight('p-crt-' + crt);

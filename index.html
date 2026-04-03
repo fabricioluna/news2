@@ -140,13 +140,10 @@
                             </select>
                         </div>
                         <div>
-                            <label id="label-cvpu" class="block text-sm font-medium text-slate-700">Consciência / Comportamento</label>
+                            <label id="label-cvpu" class="block text-sm font-medium text-slate-700">Consciência (ACVPU)</label>
                             <select id="consciousness" class="mt-1 w-full rounded border-gray-300 p-2 border font-bold text-slate-700 text-center transition-all duration-300">
                                 <option value="A">Alerta</option>
-                                <option value="C">Confusão Aguda (Nova)</option>
-                                <option value="V">Responde à Voz</option>
-                                <option value="P">Responde à Dor</option>
-                                <option value="U">Inconsciente</option>
+                                <option value="CVPU">C / V / P / U (Qualquer Alteração)</option>
                             </select>
                         </div>
                     </div>
@@ -165,22 +162,26 @@
                 <div class="glass rounded-2xl shadow-lg p-5 flex-grow overflow-y-auto custom-scrollbar h-[400px]">
                     <h3 class="font-bold text-xl mb-3 text-blue-900 border-b border-slate-300 pb-2">Dossiê Clínico de Raciocínio</h3>
 
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-3 mb-4 rounded text-sm text-blue-900">
+                        <p class="font-bold mb-1">Engenharia Clínica Rápida (Lei de Hick)</p>
+                        <p>Em emergências, cada segundo conta. Se a Confusão, Voz, Dor e Inconsciência geram o mesmo alerta vermelho (3 pontos) no NEWS2, condensá-las em um único campo acelera a triagem e reduz a carga cognitiva do profissional.</p>
+                    </div>
+
                     <details class="mb-3 bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
                         <summary class="font-semibold text-slate-800">Avaliação Neurológica por Perfil</summary>
                         <p class="text-sm text-slate-600 mt-2 leading-relaxed">
                             A alteração do nível de consciência é um dos primeiros sinais de que o cérebro sofre por hipóxia ou toxinas (sepse). A abordagem muda radicalmente:<br><br>
-                            🏥 <strong>NEWS2 (Adultos) - A Escala ACVPU:</strong> A adição do "C" (Confusão Aguda) é vital. Um paciente acordado, mas subitamente confuso, ganha 3 pontos diretos (Alerta Vermelho).<br>
+                            🏥 <strong>NEWS2 (Adultos) - Binário:</strong> O paciente está em "Alerta" ou possui qualquer alteração aguda "C/V/P/U". Qualquer fuga do basal pontua 3 imediatamente.<br>
                             🤰 <strong>MEOWS (Gestantes) - AVPU + Confusão:</strong> Simplificada, mas vigilante para a pré-eclâmpsia. Agitação/Confusão pontua 1 (Amarelo).<br>
-                            👶 <strong>PEWS (Crianças) - Comportamento:</strong> Não perguntamos a um bebê se ele está confuso. Avaliamos a interação. Irritável e inconsolável = 1 ponto; Letárgico = 2 pontos.
+                            👶 <strong>PEWS (Crianças) - Comportamento:</strong> Avaliamos a interação. Irritável e inconsolável = 1 ponto; Letárgico = 2 pontos.
                         </p>
                     </details>
 
                     <details class="mb-3 bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
                         <summary class="font-semibold text-purple-800">PEWS (Pediatria): A Grande Compensadora 👶</summary>
                         <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                            Crianças mantêm a pressão arterial normal até o último segundo antes do colapso. Se esperar a PA cair, a janela de salvamento foi perdida. O foco está na Perfusão e no Esforço Respiratório.
-                            <br><br><strong>O que sai:</strong> Pressão Arterial Sistólica perde protagonismo. Escala 2 de SpO2 sai (crianças raramente retêm CO2).
-                            <br><strong>Dica de Ouro:</strong> 
+                            Crianças mantêm a pressão arterial normal até o último segundo antes do colapso. O foco está na Perfusão e no Esforço Respiratório.
+                            <br><strong>Sacada Clínica:</strong> 
                             <br>• <em>Enchimento Capilar (TEC):</em> Se demorar > 2s, a criança está em choque, mesmo com PA normal.
                             <br>• <em>Esforço Respiratório:</em> Retrações e uso de musculatura acessória valem mais que saturação isolada.
                         </p>
@@ -189,8 +190,7 @@
                     <details class="mb-3 bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
                         <summary class="font-semibold text-pink-700">MEOWS (Obstetrícia): O Roubo Fisiológico 🤰</summary>
                         <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                            A gestante tem até 50% a mais de sangue circulante; o útero "rouba" o débito cardíaco. O foco principal é a detecção de Pressão elevada e risco de Hemorragia.
-                            <br><br><strong>O que muda:</strong> O alvo da Pressão Arterial. Uma PA de 140/90 mmHg no adulto é "moderada", mas na gestante é <em>Alerta Vermelho para Pré-eclâmpsia</em>.
+                            A gestante tem até 50% a mais de sangue circulante. O foco principal é a detecção de Pressão elevada e risco de Hemorragia.
                             <br><strong>A Estrela da Tabela:</strong> A <em>Pressão Diastólica</em>. É o parâmetro mais sensível para detectar resistência dos vasos placentários, sendo obrigatória.
                         </p>
                     </details>
@@ -418,9 +418,9 @@
                         <tr>
                             <td class="p-2 border border-pink-300 bg-pink-100 text-pink-900 text-left font-bold">Consciência (AVPU)</td>
                             <td class="p-2 border border-pink-300 bg-red-300"></td>
-                            <td class="p-2 border border-pink-300 bg-yellow-100"></td>
+                            <td id="m-cvp-A" class="p-2 border border-pink-300 bg-yellow-100">Confusa/Agitada</td>
                             <td id="m-cvp-0" class="p-2 border border-pink-300">Alerta</td>
-                            <td id="m-cvp-A" class="p-2 border border-pink-300 bg-yellow-100">Confusa / Agitada</td>
+                            <td class="p-2 border border-pink-300 bg-yellow-100"></td>
                             <td id="m-cvp-3R" class="p-2 border border-pink-300 bg-red-300">V / P / U</td>
                         </tr>
                     </tbody>
@@ -512,7 +512,6 @@
             if (cell) cell.classList.add('highlight-cell');
         }
 
-        // Função para atualizar dinamicamente o select de Consciência
         function updateConsciousnessDropdown(protocol) {
             const currentVal = ui.cvpuSelect.value;
             
@@ -534,24 +533,19 @@
             } else {
                 ui.cvpuLabel.innerText = "Consciência (ACVPU)";
                 ui.cvpuSelect.innerHTML = `
-                    <option value="A">Alerta</option>
-                    <option value="C">Confusão Aguda (Nova)</option>
-                    <option value="V">Responde à Voz</option>
-                    <option value="P">Responde à Dor</option>
-                    <option value="U">Inconsciente</option>
+                    <option value="A">Alerta (Normal)</option>
+                    <option value="CVPU">C / V / P / U (Qualquer Alteração)</option>
                 `;
             }
             
-            // Tenta manter o valor selecionado se ele ainda existir na nova lista
             const optionsArray = Array.from(ui.cvpuSelect.options).map(opt => opt.value);
             if (optionsArray.includes(currentVal)) {
                 ui.cvpuSelect.value = currentVal;
             } else {
-                ui.cvpuSelect.value = 'A'; // Default para seguro
+                ui.cvpuSelect.value = 'A';
             }
         }
 
-        // Variável de estado para evitar re-renderizações infinitas do dropdown
         let lastProtocol = '';
 
         function runCalculations() {

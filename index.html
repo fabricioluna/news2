@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEWS2 - Calculadora Clínica Integrada | FMS</title>
+    <title>NEWS2 / PEWS / MEOWS - Calculadora Clínica | FMS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Glassmorphism utility */
+        /* Glassmorphism */
         .glass {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        /* Color transitions for inputs */
-        .score-indicator { transition: background-color 0.3s ease; }
+        .transition-all { transition: all 0.3s ease; }
     </style>
 </head>
 <body class="bg-slate-100 min-h-screen font-sans text-slate-800 p-4 md:p-8 flex flex-col items-center">
 
     <header class="text-center mb-8 max-w-3xl">
-        <h1 class="text-3xl font-bold text-blue-900 mb-2">Calculadora NEWS2</h1>
-        <p class="text-slate-600">National Early Warning Score 2 - Ferramenta de apoio à decisão clínica para detecção precoce de deterioração em adultos.</p>
+        <h1 class="text-3xl font-bold text-blue-900 mb-2">Calculadora de Triagem Inteligente</h1>
+        <p class="text-slate-600">Sistema dinâmico: NEWS2 (Adultos) | PEWS (Pediatria) | MEOWS (Obstetrícia)</p>
     </header>
 
     <main class="w-full max-w-4xl grid md:grid-cols-2 gap-6 mb-8">
@@ -30,14 +29,21 @@
             <h2 class="text-xl font-semibold mb-4 border-b pb-2">Perfil e Parâmetros</h2>
             <form id="news2-form" class="space-y-4">
                 
-                <div class="grid grid-cols-2 gap-4 bg-blue-50 p-3 rounded-lg border border-blue-100">
+                <div class="grid grid-cols-3 gap-2 bg-blue-50 p-3 rounded-lg border border-blue-100">
                     <div>
-                        <label class="block text-sm font-bold text-blue-900">Idade</label>
-                        <input type="number" id="idade" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-blue-500 focus:border-blue-500" placeholder="Ex: 45" required>
+                        <label class="block text-xs font-bold text-blue-900">Idade</label>
+                        <input type="number" id="idade" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-blue-500" placeholder="Ex: 45" required>
                     </div>
                     <div>
-                        <label class="block text-sm font-bold text-blue-900">Gestante?</label>
-                        <select id="gestante" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border">
+                        <label class="block text-xs font-bold text-blue-900">Sexo</label>
+                        <select id="sexo" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border">
+                            <option value="M">Masc</option>
+                            <option value="F">Fem</option>
+                        </select>
+                    </div>
+                    <div id="div-gestante" class="hidden">
+                        <label class="block text-xs font-bold text-pink-700">Gestante?</label>
+                        <select id="gestante" class="mt-1 w-full rounded-md border-pink-300 shadow-sm p-2 border focus:ring-pink-500">
                             <option value="nao">Não</option>
                             <option value="sim">Sim</option>
                         </select>
@@ -46,11 +52,20 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-700">Frequência Respiratória (irpm)</label>
-                    <input type="number" id="resp-rate" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-blue-500 focus:border-blue-500" placeholder="Ex: 16" required>
+                    <input type="number" id="resp-rate" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="Ex: 16">
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-slate-700">Escala de SpO2</label>
+                <div id="div-resp-effort" class="hidden bg-purple-50 p-2 rounded border border-purple-200">
+                    <label class="block text-sm font-bold text-purple-800">Esforço Respiratório (PEWS)</label>
+                    <select id="resp-effort" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border">
+                        <option value="0">Normal / Sem esforço</option>
+                        <option value="1">Leve (Retração subcostal leve)</option>
+                        <option value="2">Grave (Gemência, Batimento de asa de nariz)</option>
+                    </select>
+                </div>
+
+                <div id="div-spo2-scale">
+                    <label class="block text-sm font-medium text-slate-700">Escala de SpO2 (NEWS2)</label>
                     <select id="spo2-scale" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border">
                         <option value="1">Escala 1 (Padrão)</option>
                         <option value="2">Escala 2 (Alvo 88-92% - Ex: DPOC)</option>
@@ -59,7 +74,7 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-700">SpO2 (%)</label>
-                    <input type="number" id="spo2" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="Ex: 96" required>
+                    <input type="number" id="spo2" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="Ex: 96">
                 </div>
 
                 <div>
@@ -70,22 +85,37 @@
                     </select>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-slate-700">Pressão Arterial Sistólica (mmHg)</label>
-                    <input type="number" id="sbp" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="Ex: 120" required>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700">PASistólica (mmHg)</label>
+                        <input type="number" id="sbp" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="Ex: 120">
+                    </div>
+                    <div id="div-pad" class="hidden">
+                        <label class="block text-sm font-bold text-pink-700">PADiastólica (MEOWS)</label>
+                        <input type="number" id="dbp" class="mt-1 w-full rounded-md border-pink-300 shadow-sm p-2 border" placeholder="Ex: 80">
+                    </div>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-slate-700">Frequência Cardíaca (bpm)</label>
-                    <input type="number" id="hr" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="Ex: 80" required>
+                    <input type="number" id="hr" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="Ex: 80">
+                </div>
+
+                <div id="div-crt" class="hidden bg-purple-50 p-2 rounded border border-purple-200">
+                    <label class="block text-sm font-bold text-purple-800">Tempo de Enchimento Capilar (CRT)</label>
+                    <select id="crt" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border">
+                        <option value="0">Normal (&le; 2 seg)</option>
+                        <option value="1">Aumentado (3 seg)</option>
+                        <option value="2">Prolongado (&ge; 4 seg)</option>
+                    </select>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-slate-700">Nível de Consciência (ACVPU)</label>
+                    <label class="block text-sm font-medium text-slate-700">Nível de Consciência (ACVPU / Comportamento)</label>
                     <select id="consciousness" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border">
-                        <option value="A">Alerta</option>
-                        <option value="C">Confusão (Nova)</option>
-                        <option value="V">Responde à Voz</option>
+                        <option value="A">Alerta / Brincando normal</option>
+                        <option value="C">Confusão Mental Aguda / Irritável</option>
+                        <option value="V">Responde à Voz / Letárgico</option>
                         <option value="P">Responde à Dor</option>
                         <option value="U">Inconsciente / Irresponsivo</option>
                     </select>
@@ -93,17 +123,17 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-700">Temperatura (°C)</label>
-                    <input type="number" step="0.1" id="temp" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="Ex: 36.5" required>
+                    <input type="number" step="0.1" id="temp" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border" placeholder="Ex: 36.5">
                 </div>
             </form>
         </section>
 
         <section class="flex flex-col gap-6">
-            <div id="result-card" class="glass rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-colors duration-500 bg-white">
-                <h2 class="text-xl font-semibold mb-2">Escore Total</h2>
+            <div id="result-card" class="glass rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-all duration-500 bg-white">
+                <h2 id="protocol-title" class="text-xl font-semibold mb-2">Escore Total</h2>
                 <div id="total-score" class="text-6xl font-black text-slate-800 my-4">-</div>
-                <div id="risk-level" class="text-lg font-bold uppercase tracking-wider text-slate-600 mb-2">Aguardando dados...</div>
-                <p id="clinical-response" class="text-sm text-slate-700">Preencha o perfil e os parâmetros ao lado para gerar a resposta clínica recomendada.</p>
+                <div id="risk-level" class="text-lg font-bold uppercase tracking-wider text-slate-600 mb-2">Aguardando Perfil...</div>
+                <p id="clinical-response" class="text-sm text-slate-700">Preencha Idade e Sexo para calibrar o protocolo adequado.</p>
             </div>
 
             <div class="glass rounded-2xl shadow-lg p-6">
@@ -113,20 +143,20 @@
                     <summary class="font-semibold text-slate-800">Por que não usar o NEWS2 para todos?</summary>
                     <p class="text-sm text-slate-600 mt-2">
                         Pense no sistema cardiovascular como o motor de um veículo:<br><br>
-                        🚗 <strong>NEWS2 (Adultos):</strong> É o painel de um carro de passeio comum. Os alertas são calibrados para a rotação padrão.<br><br>
-                        🏍️ <strong>PEWS (Pediatria):</strong> É o painel de uma moto esportiva. Crianças trabalham em "rotações altíssimas" fisiologicamente (FC e FR maiores). O NEWS2 daria alarme falso nelas.<br><br>
-                        🚛 <strong>MEOWS (Gestantes):</strong> É um caminhão puxando carga pesada. A gestante tem até 50% a mais de volume plasmático e o coração bate "por dois". A régua para sepse ou pré-eclâmpsia exige parâmetros exclusivos para proteger o binômio mãe-bebê.
+                        🏥 <strong>NEWS2 (Adultos):</strong> É o painel de um carro de passeio comum. Foco na falência respiratória e sepse.<br><br>
+                        👶 <strong>PEWS (Pediatria):</strong> É o painel de uma moto esportiva. Crianças entram em choque de perfusão ANTES da pressão cair, por isso monitoramos o <em>Enchimento Capilar</em> e o <em>Esforço Respiratório</em>.<br><br>
+                        🤰 <strong>MEOWS (Gestantes):</strong> É um caminhão puxando carga pesada. A <em>Pressão Diastólica</em> é o principal preditor de risco obstétrico (Pré-eclâmpsia).
                     </p>
                 </details>
 
                 <details class="mb-2 bg-slate-50 rounded p-2 cursor-pointer">
                     <summary class="font-semibold text-slate-800">O que é o NEWS2?</summary>
-                    <p class="text-sm text-slate-600 mt-2">O National Early Warning Score 2 é o padrão-ouro (adaptado transculturalmente para o Brasil) para avaliação de doenças agudas em adultos. Ele pontua 6 parâmetros fisiológicos para prever o risco de deterioração clínica e parada cardíaca.</p>
+                    <p class="text-sm text-slate-600 mt-2">O National Early Warning Score 2 é o padrão-ouro (adaptado transculturalmente para o Brasil) para avaliação de doenças agudas em adultos. Ele pontua parâmetros para prever o risco de deterioração clínica e parada cardíaca.</p>
                 </details>
 
                 <details class="bg-slate-50 rounded p-2 cursor-pointer">
                     <summary class="font-semibold text-slate-800">NEWS2 vs. qSOFA</summary>
-                    <p class="text-sm text-slate-600 mt-2">Enquanto o qSOFA diagnostica a sepse já instalada (quando o "carro já quebrou"), o NEWS2 acende a luz amarela precocemente, identificando a deterioração horas antes e garantindo intervenções na "janela de ouro".</p>
+                    <p class="text-sm text-slate-600 mt-2">Enquanto o qSOFA diagnostica a sepse já instalada (quando o "carro já quebrou"), o NEWS2 acende a luz amarela precocemente, garantindo intervenções na "janela de ouro".</p>
                 </details>
             </div>
         </section>
@@ -141,17 +171,103 @@
         const form = document.getElementById('news2-form');
         const inputs = form.querySelectorAll('input, select');
         
+        // Elementos Dinâmicos da UI
+        const divGestante = document.getElementById('div-gestante');
+        const selectGestante = document.getElementById('gestante');
+        const divSpo2Scale = document.getElementById('div-spo2-scale');
+        const divRespEffort = document.getElementById('div-resp-effort');
+        const divCrt = document.getElementById('div-crt');
+        const divPad = document.getElementById('div-pad');
+        
         inputs.forEach(input => {
-            input.addEventListener('input', calculateNews2);
-            input.addEventListener('change', calculateNews2);
+            input.addEventListener('input', updateInterfaceAndCalculate);
+            input.addEventListener('change', updateInterfaceAndCalculate);
         });
 
-        function calculateNews2() {
-            // Perfil
+        function updateInterfaceAndCalculate() {
+            // 1. DADOS DE PERFIL
             const idade = parseFloat(document.getElementById('idade').value);
-            const gestante = document.getElementById('gestante').value;
+            const sexo = document.getElementById('sexo').value;
+            
+            // Controle de Exibição Gestante
+            if (sexo === 'M') {
+                divGestante.classList.add('hidden');
+                selectGestante.value = 'nao';
+            } else {
+                divGestante.classList.remove('hidden');
+            }
+            
+            const gestante = selectGestante.value;
+            let currentProtocol = 'NEWS2';
 
-            // Parâmetros
+            // 2. LÓGICA DE ALTERNÂNCIA DE INPUTS (UI DINÂMICA)
+            if (!isNaN(idade) && idade < 16) {
+                currentProtocol = 'PEWS';
+                divSpo2Scale.classList.add('hidden');
+                divRespEffort.classList.remove('hidden');
+                divCrt.classList.remove('hidden');
+                divPad.classList.add('hidden');
+                divGestante.classList.add('hidden'); // Criança <16 bloqueia MEOWS visualmente
+            } else if (sexo === 'F' && gestante === 'sim') {
+                currentProtocol = 'MEOWS';
+                divSpo2Scale.classList.remove('hidden');
+                divRespEffort.classList.add('hidden');
+                divCrt.classList.add('hidden');
+                divPad.classList.remove('hidden');
+            } else {
+                currentProtocol = 'NEWS2';
+                divSpo2Scale.classList.remove('hidden');
+                divRespEffort.classList.add('hidden');
+                divCrt.classList.add('hidden');
+                divPad.classList.add('hidden');
+            }
+
+            // 3. EXECUÇÃO DO CÁLCULO
+            calculateScores(currentProtocol, idade);
+        }
+
+        function calculateScores(protocol, idade) {
+            const scoreDiv = document.getElementById('total-score');
+            const riskDiv = document.getElementById('risk-level');
+            const respDiv = document.getElementById('clinical-response');
+            const card = document.getElementById('result-card');
+            const protocolTitle = document.getElementById('protocol-title');
+
+            if (isNaN(idade)) {
+                protocolTitle.innerText = "Escore Total";
+                scoreDiv.innerText = '-';
+                riskDiv.innerText = 'Aguardando Perfil...';
+                respDiv.innerText = 'Preencha a Idade e Sexo para calibrar a calculadora.';
+                card.className = "glass rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-all duration-500 bg-white";
+                return;
+            }
+
+            // PROTOCOLO PEWS (👶)
+            if (protocol === 'PEWS') {
+                protocolTitle.innerText = "Protocolo Pediátrico";
+                scoreDiv.innerText = '👶';
+                riskDiv.innerText = 'MODO PEWS ATIVO';
+                riskDiv.className = 'text-lg font-bold uppercase tracking-wider text-purple-700 mb-2';
+                respDiv.innerHTML = 'Parâmetros de <strong>Perfusão (CRT)</strong> e <strong>Esforço Respiratório</strong> ativados. <br><span class="text-xs">(O cálculo PEWS final está em integração com as tabelas de referência cruzada por faixa etária).</span>';
+                card.className = "rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-all duration-500 bg-purple-100 border-2 border-purple-500";
+                return;
+            }
+
+            // PROTOCOLO MEOWS (🤰)
+            if (protocol === 'MEOWS') {
+                protocolTitle.innerText = "Protocolo Obstétrico";
+                scoreDiv.innerText = '🤰';
+                riskDiv.innerText = 'MODO MEOWS ATIVO';
+                riskDiv.className = 'text-lg font-bold uppercase tracking-wider text-pink-700 mb-2';
+                respDiv.innerHTML = 'Monitoramento de <strong>Pressão Diastólica (PAD)</strong> ativado para rastreio de Pré-Eclâmpsia/Hemorragia. <br><span class="text-xs">(Escore materno em validação de tabelas).</span>';
+                card.className = "rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-all duration-500 bg-pink-100 border-2 border-pink-500";
+                return;
+            }
+
+            // PROTOCOLO NEWS2 (🏥)
+            protocolTitle.innerText = "Escore NEWS2";
+            
+            // Coleta de dados NEWS2
             const rr = parseFloat(document.getElementById('resp-rate').value);
             const scale = document.getElementById('spo2-scale').value;
             const spo2 = parseFloat(document.getElementById('spo2').value);
@@ -161,38 +277,10 @@
             const cvpu = document.getElementById('consciousness').value;
             const temp = parseFloat(document.getElementById('temp').value);
 
-            const scoreDiv = document.getElementById('total-score');
-            const riskDiv = document.getElementById('risk-level');
-            const respDiv = document.getElementById('clinical-response');
-            const card = document.getElementById('result-card');
-
-            // TRAVAS DE SEGURANÇA (PEWS e MEOWS)
-            if (!isNaN(idade) && idade < 16) {
-                scoreDiv.innerText = '🏍️';
-                riskDiv.innerText = 'MODO PEWS REQUERIDO';
-                riskDiv.className = 'text-lg font-bold uppercase tracking-wider text-purple-700 mb-2';
-                respDiv.innerHTML = '<strong>Aviso de Segurança:</strong> O NEWS2 não é validado para menores de 16 anos. Aplique o <em>Pediatric Early Warning Score (PEWS)</em>.';
-                card.className = "rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-colors duration-500 bg-purple-100 border-2 border-purple-500";
-                return;
-            }
-
-            if (gestante === 'sim') {
-                scoreDiv.innerText = '🚛';
-                riskDiv.innerText = 'MODO MEOWS REQUERIDO';
-                riskDiv.className = 'text-lg font-bold uppercase tracking-wider text-pink-700 mb-2';
-                respDiv.innerHTML = '<strong>Aviso de Segurança:</strong> A fisiologia da gestação altera os parâmetros basais (ex: taquicardia e hipervolemia). Aplique o <em>Maternal Early Warning Score (MEOWS)</em>.';
-                card.className = "rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-colors duration-500 bg-pink-100 border-2 border-pink-500";
-                return;
-            }
-
             let total = 0;
             let maxParam = 0; 
             let isComplete = true;
-
-            const checkMax = (val) => {
-                if (val > maxParam) maxParam = val;
-                return val;
-            }
+            const checkMax = (val) => { if (val > maxParam) maxParam = val; return val; }
 
             // RR
             if (isNaN(rr)) isComplete = false;
@@ -275,39 +363,38 @@
                 total += checkMax(tempScore);
             }
 
-            // Verifica se a idade também foi preenchida para liberar o resultado
-            if (!isComplete || isNaN(idade)) {
-                scoreDiv.innerText = '-';
-                riskDiv.innerText = 'Aguardando dados...';
-                respDiv.innerText = 'Preencha o perfil e todos os parâmetros ao lado para gerar a resposta clínica.';
-                card.className = "glass rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-colors duration-500 bg-white";
+            if (!isComplete) {
+                scoreDiv.innerText = '🏥';
+                riskDiv.innerText = 'NEWS2 ATIVO';
+                respDiv.innerText = 'Preencha os parâmetros para gerar a pontuação.';
+                card.className = "glass rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-all duration-500 bg-blue-50 border-2 border-blue-200";
                 return;
             }
 
-            scoreDiv.innerText = total;
+            scoreDiv.innerHTML = `${total} <span class="text-3xl text-slate-500">🏥</span>`;
 
             if (total >= 7) {
-                card.className = "rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-colors duration-500 bg-red-100 border-2 border-red-500";
+                card.className = "rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-all duration-500 bg-red-100 border-2 border-red-500";
                 riskDiv.innerText = 'RISCO ALTO';
                 riskDiv.className = 'text-lg font-bold uppercase tracking-wider text-red-700 mb-2';
-                respDiv.innerText = 'Resposta de emergência. Avaliação imediata por equipe médica (nível especialista/UTI). Monitoramento contínuo.';
+                respDiv.innerText = 'Resposta de emergência. Avaliação imediata por equipe médica. Monitoramento contínuo.';
             } else if (total >= 5 || total === 6) {
-                card.className = "rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-colors duration-500 bg-orange-100 border-2 border-orange-500";
+                card.className = "rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-all duration-500 bg-orange-100 border-2 border-orange-500";
                 riskDiv.innerText = 'RISCO MÉDIO';
                 riskDiv.className = 'text-lg font-bold uppercase tracking-wider text-orange-700 mb-2';
-                respDiv.innerText = 'Resposta urgente. Avaliação urgente por médico habilitado. Sinais vitais de 1/1 hora.';
+                respDiv.innerText = 'Resposta urgente. Avaliação médica urgente. Sinais vitais de 1/1 hora.';
             } else if (maxParam === 3) {
-                card.className = "rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-colors duration-500 bg-yellow-100 border-2 border-yellow-500";
+                card.className = "rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-all duration-500 bg-yellow-100 border-2 border-yellow-500";
                 riskDiv.innerText = 'RISCO BAIXO-MÉDIO (Red Score)';
                 riskDiv.className = 'text-lg font-bold uppercase tracking-wider text-yellow-700 mb-2';
-                respDiv.innerText = 'Atenção! Um parâmetro atingiu pontuação máxima (3). Avaliação médica urgente. Sinais vitais a cada 1 hora.';
+                respDiv.innerText = 'Atenção! Um parâmetro com pontuação máxima (3). Sinais vitais a cada 1 hora.';
             } else {
                 let bgColor = total > 0 ? 'bg-yellow-50 border-yellow-300' : 'bg-green-50 border-green-400';
                 let textColor = total > 0 ? 'text-yellow-700' : 'text-green-700';
-                card.className = `rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-colors duration-500 ${bgColor} border-2`;
+                card.className = `rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-all duration-500 ${bgColor} border-2`;
                 riskDiv.innerText = 'RISCO BAIXO';
                 riskDiv.className = `text-lg font-bold uppercase tracking-wider ${textColor} mb-2`;
-                respDiv.innerText = total === 0 ? 'Monitoramento de rotina a cada 12 horas.' : 'Avaliação pela enfermagem. Sinais vitais a cada 4 a 6 horas.';
+                respDiv.innerText = total === 0 ? 'Monitoramento a cada 12 horas.' : 'Avaliação pela enfermagem. Sinais vitais a cada 4 a 6 horas.';
             }
         }
     </script>

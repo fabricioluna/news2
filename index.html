@@ -165,38 +165,45 @@
                 <div class="glass rounded-2xl shadow-lg p-5 flex-grow overflow-y-auto custom-scrollbar h-[400px]">
                     <h3 class="font-bold text-xl mb-3 text-blue-900 border-b border-slate-300 pb-2">Dossiê Clínico de Raciocínio</h3>
 
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-3 mb-4 rounded text-sm text-blue-900">
+                        <p class="font-bold mb-1">Engenharia Clínica e Triagem Direcionada</p>
+                        <p>O sistema evita a <em>fadiga de alarme</em> ao solicitar apenas os parâmetros que predizem risco para o perfil selecionado. <strong>O PEWS foca em Perfusão/Esforço, o MEOWS foca em Pressão/Hemorragia e o NEWS2 foca em Falência Respiratória/Sepse.</strong></p>
+                    </div>
+
                     <details class="mb-3 bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
                         <summary class="font-semibold text-slate-800">Avaliação Neurológica por Perfil</summary>
                         <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                            A alteração do nível de consciência é um dos primeiros sinais de que o cérebro sofre por hipóxia ou toxinas (sepse). A abordagem muda radicalmente:<br><br>
-                            🏥 <strong>NEWS2 (Adultos) - A Escala ACVPU:</strong> A adição do "C" (Confusão Aguda) é vital. Um paciente acordado, mas subitamente confuso, ganha 3 pontos diretos (Alerta Vermelho).<br>
-                            🤰 <strong>MEOWS (Gestantes) - AVPU + Confusão:</strong> Simplificada, mas vigilante para a pré-eclâmpsia. Agitação/Confusão pontua 1 (Amarelo). O restante (V, P, U) pontua 3 (Vermelho).<br>
-                            👶 <strong>PEWS (Crianças) - Comportamento:</strong> Não perguntamos a um bebê se ele está confuso. Avaliamos a interação. Irritável e inconsolável = 1 ponto; Letárgico = 2 pontos; Apenas dor/Inconsciente = 3 pontos.
+                            A alteração do nível de consciência é um dos primeiros sinais de que o cérebro sofre por hipóxia ou toxinas. A abordagem muda conforme o perfil:<br><br>
+                            🏥 <strong>NEWS2 (Adultos) - Escala ACVPU:</strong> A adição do "C" (Confusão Aguda) é vital. Um paciente acordado, mas subitamente confuso, pontua 3 imediatamente.<br>
+                            🤰 <strong>MEOWS (Gestantes) - AVPU + Confusão:</strong> Simplificada, mas vigilante para a pré-eclâmpsia. Agitação/Confusão pontua 1 (Amarelo).<br>
+                            👶 <strong>PEWS (Crianças) - Comportamento:</strong> Avaliamos a interação. Irritável e inconsolável = 1 ponto; Letárgico = 2 pontos; Apenas dor/Inconsciente = 3 pontos.
                         </p>
                     </details>
 
                     <details class="mb-3 bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
-                        <summary class="font-semibold text-purple-800">PEWS (Pediatria): A Grande Compensadora 👶</summary>
+                        <summary class="font-semibold text-purple-800">PEWS (Pediatria): Fisiologia e Sinais de Alerta 👶</summary>
                         <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                            Crianças mantêm a pressão arterial normal até o último segundo antes do colapso. Se esperar a PA cair, a janela de salvamento foi perdida. O foco está na Perfusão e no Esforço Respiratório.
-                            <br><strong>Sacada Clínica:</strong> 
-                            <br>• <em>Enchimento Capilar (TEC):</em> Se demorar > 2s, a criança está em choque, mesmo com PA normal.
-                            <br>• <em>Esforço Respiratório:</em> Retrações e uso de musculatura acessória valem mais que saturação isolada.
+                            Crianças mantêm a pressão arterial normal até o último segundo antes do colapso. Se a equipe aguardar a PA cair, a janela de salvamento terá sido perdida. O foco fisiológico recai sobre a Perfusão e o Esforço Respiratório.
+                            <br><br><strong>O que sai:</strong> Pressão Arterial Sistólica perde protagonismo. Escala 2 de SpO2 não é aplicada (crianças raramente apresentam retenção crônica de CO2).
+                            <br><strong>Parâmetros Críticos:</strong> 
+                            <br>• <em>Enchimento Capilar (TEC):</em> Se o retorno capilar ultrapassar 2 segundos, há indicativo de choque, mesmo com PA preservada.
+                            <br>• <em>Esforço Respiratório:</em> Retrações e uso de musculatura acessória possuem maior valor preditivo que a saturação isolada.
                         </p>
                     </details>
 
                     <details class="mb-3 bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
-                        <summary class="font-semibold text-pink-700">MEOWS (Obstetrícia): O Roubo Fisiológico 🤰</summary>
+                        <summary class="font-semibold text-pink-700">MEOWS (Obstetrícia): Adaptações Hemodinâmicas 🤰</summary>
                         <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                            A gestante tem até 50% a mais de sangue circulante. O foco principal é a detecção de Pressão elevada e risco de Hemorragia.
-                            <br><strong>A Estrela da Tabela:</strong> A <em>Pressão Diastólica</em>. É o parâmetro mais sensível para detectar resistência dos vasos placentários, sendo obrigatória.
+                            A gestante apresenta um aumento de até 50% no volume sanguíneo circulante, e o útero demanda uma fração significativa do débito cardíaco. O foco principal da triagem é a detecção de quadros hipertensivos e o risco de hemorragia.
+                            <br><br><strong>O que muda:</strong> O alvo da Pressão Arterial. Uma PA de 140/90 mmHg no adulto não gestante é considerada moderada, porém na gestante constitui um <em>Alerta Vermelho para Pré-eclâmpsia</em>.
+                            <br><strong>Parâmetro Chave:</strong> A <em>Pressão Diastólica</em>. Por ser o parâmetro mais sensível para detectar o aumento da resistência vascular placentária, sua monitorização é obrigatória neste protocolo.
                         </p>
                     </details>
 
                     <details class="mb-3 bg-white rounded p-3 shadow-sm border border-slate-200 cursor-pointer">
                         <summary class="font-semibold text-red-700">A "Regra do 3 Isolado" (NEWS2) 🏥</summary>
                         <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                            O NEWS2 atua como um "termômetro de risco". Se o paciente tiver todos os sinais normais, mas a FR for 25 irpm (vale 3 pontos), a pontuação total é 3. Mesmo sendo um valor baixo (3 de 20), ele entra em risco <strong>Baixo-Médio</strong>, pois um '3 isolado' indica falência iminente de um órgão específico.
+                            O NEWS2 atua como um medidor global de risco. Se o paciente apresentar todos os sinais basais normais, contudo a Frequência Respiratória aferida for de 25 irpm (que pontua 3 isoladamente), a pontuação total será 3. Apesar do valor numérico absoluto ser baixo (3 de 20 possíveis), o paciente é classificado no risco <strong>Baixo-Médio</strong>, uma vez que um '3 isolado' alerta para a falência iminente de um sistema ou órgão específico.
                         </p>
                     </details>
 
@@ -329,7 +336,7 @@
                             <td id="n-hr-3R" class="p-2 border border-slate-300 bg-red-300">&ge; 131</td>
                         </tr>
                         <tr>
-                            <td class="p-2 border border-slate-300 bg-blue-700 text-white text-left font-bold">Consciência (ACVPU)</td>
+                            <td class="p-2 border border-slate-300 bg-blue-700 text-white text-left font-bold">Consciência</td>
                             <td class="p-2 border border-slate-300 bg-red-300"></td>
                             <td class="p-2 border border-slate-300 bg-orange-200"></td>
                             <td class="p-2 border border-slate-300 bg-yellow-100"></td>
@@ -441,8 +448,8 @@
                             <td class="p-2 border border-purple-300 bg-purple-100 text-purple-900 text-left font-bold">Comportamento</td>
                             <td id="p-cvp-0" class="p-2 border border-purple-300">Brincando / Ativo</td>
                             <td id="p-cvp-1" class="p-2 border border-purple-300 bg-yellow-100">Irritável (consolável)</td>
-                            <td id="p-cvp-2" class="p-2 border border-purple-300 bg-orange-200">Letárgico / Resposta reduzida</td>
-                            <td id="p-cvp-3" class="p-2 border border-purple-300 bg-red-300">Inconsciente / Apenas dor</td>
+                            <td id="p-cvp-2" class="p-2 border border-purple-300 bg-orange-200">Letárgico</td>
+                            <td id="p-cvp-3" class="p-2 border border-purple-300 bg-red-300">Inconsciente / Dor</td>
                         </tr>
                         <tr>
                             <td class="p-2 border border-purple-300 bg-purple-100 text-purple-900 text-left font-bold">Enchimento Capilar (TEC)</td>

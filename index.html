@@ -24,12 +24,26 @@
         <p class="text-slate-600">National Early Warning Score 2 - Ferramenta de apoio à decisão clínica para detecção precoce de deterioração em adultos.</p>
     </header>
 
-    <main class="w-full max-w-4xl grid md:grid-cols-2 gap-6">
+    <main class="w-full max-w-4xl grid md:grid-cols-2 gap-6 mb-8">
         
         <section class="glass rounded-2xl shadow-lg p-6">
-            <h2 class="text-xl font-semibold mb-4 border-b pb-2">Parâmetros Fisiológicos</h2>
+            <h2 class="text-xl font-semibold mb-4 border-b pb-2">Perfil e Parâmetros</h2>
             <form id="news2-form" class="space-y-4">
                 
+                <div class="grid grid-cols-2 gap-4 bg-blue-50 p-3 rounded-lg border border-blue-100">
+                    <div>
+                        <label class="block text-sm font-bold text-blue-900">Idade</label>
+                        <input type="number" id="idade" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-blue-500 focus:border-blue-500" placeholder="Ex: 45" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-blue-900">Gestante?</label>
+                        <select id="gestante" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border">
+                            <option value="nao">Não</option>
+                            <option value="sim">Sim</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div>
                     <label class="block text-sm font-medium text-slate-700">Frequência Respiratória (irpm)</label>
                     <input type="number" id="resp-rate" class="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-blue-500 focus:border-blue-500" placeholder="Ex: 16" required>
@@ -89,36 +103,41 @@
                 <h2 class="text-xl font-semibold mb-2">Escore Total</h2>
                 <div id="total-score" class="text-6xl font-black text-slate-800 my-4">-</div>
                 <div id="risk-level" class="text-lg font-bold uppercase tracking-wider text-slate-600 mb-2">Aguardando dados...</div>
-                <p id="clinical-response" class="text-sm text-slate-700">Preencha todos os parâmetros ao lado para gerar a resposta clínica recomendada.</p>
+                <p id="clinical-response" class="text-sm text-slate-700">Preencha o perfil e os parâmetros ao lado para gerar a resposta clínica recomendada.</p>
             </div>
 
             <div class="glass rounded-2xl shadow-lg p-6">
-                <h3 class="font-bold text-lg mb-4 text-blue-900 border-b pb-2">Material Didático (Dossiê)</h3>
+                <h3 class="font-bold text-lg mb-4 text-blue-900 border-b pb-2">Dossiê Clínico: O Pulo do Gato 💡</h3>
                 
                 <details class="mb-2 bg-slate-50 rounded p-2 cursor-pointer">
-                    <summary class="font-semibold text-slate-800">O que é o NEWS2?</summary>
-                    <p class="text-sm text-slate-600 mt-2">O National Early Warning Score 2 é uma ferramenta desenvolvida pelo Royal College of Physicians para padronizar a avaliação de doenças agudas em adultos. Ele pontua 6 parâmetros fisiológicos para prever o risco de deterioração clínica, parada cardíaca ou morte.</p>
-                </details>
-
-                <details class="mb-2 bg-slate-50 rounded p-2 cursor-pointer">
-                    <summary class="font-semibold text-slate-800">NEWS2 vs. PEWS vs. MEOWS</summary>
+                    <summary class="font-semibold text-slate-800">Por que não usar o NEWS2 para todos?</summary>
                     <p class="text-sm text-slate-600 mt-2">
-                        <strong>NEWS2:</strong> Para adultos não gestantes.<br>
-                        <strong>PEWS (Pediatric):</strong> Considera as variações fisiológicas normais baseadas na idade da criança (ex: FC basal de um bebê é maior).<br>
-                        <strong>MEOWS (Maternal):</strong> Adaptado para as profundas alterações hemodinâmicas da gestação (ex: aumento do volume plasmático e taquicardia fisiológica).
+                        Pense no sistema cardiovascular como o motor de um veículo:<br><br>
+                        🚗 <strong>NEWS2 (Adultos):</strong> É o painel de um carro de passeio comum. Os alertas são calibrados para a rotação padrão.<br><br>
+                        🏍️ <strong>PEWS (Pediatria):</strong> É o painel de uma moto esportiva. Crianças trabalham em "rotações altíssimas" fisiologicamente (FC e FR maiores). O NEWS2 daria alarme falso nelas.<br><br>
+                        🚛 <strong>MEOWS (Gestantes):</strong> É um caminhão puxando carga pesada. A gestante tem até 50% a mais de volume plasmático e o coração bate "por dois". A régua para sepse ou pré-eclâmpsia exige parâmetros exclusivos para proteger o binômio mãe-bebê.
                     </p>
                 </details>
 
+                <details class="mb-2 bg-slate-50 rounded p-2 cursor-pointer">
+                    <summary class="font-semibold text-slate-800">O que é o NEWS2?</summary>
+                    <p class="text-sm text-slate-600 mt-2">O National Early Warning Score 2 é o padrão-ouro (adaptado transculturalmente para o Brasil) para avaliação de doenças agudas em adultos. Ele pontua 6 parâmetros fisiológicos para prever o risco de deterioração clínica e parada cardíaca.</p>
+                </details>
+
                 <details class="bg-slate-50 rounded p-2 cursor-pointer">
-                    <summary class="font-semibold text-slate-800">NEWS2 vs. qSOFA (Prevenção de IRAS)</summary>
-                    <p class="text-sm text-slate-600 mt-2">O qSOFA é altamente específico para mortalidade em sepse, mas pouco sensível para detecção precoce. O NEWS2 identifica a deterioração associada a Infecções Relacionadas à Assistência à Saúde (IRAS) horas antes, garantindo intervenções na "janela de ouro".</p>
+                    <summary class="font-semibold text-slate-800">NEWS2 vs. qSOFA</summary>
+                    <p class="text-sm text-slate-600 mt-2">Enquanto o qSOFA diagnostica a sepse já instalada (quando o "carro já quebrou"), o NEWS2 acende a luz amarela precocemente, identificando a deterioração horas antes e garantindo intervenções na "janela de ouro".</p>
                 </details>
             </div>
         </section>
     </main>
 
+    <footer class="w-full max-w-4xl text-center border-t border-slate-300 pt-4 pb-8">
+        <p class="text-sm text-slate-500 font-medium">Desenvolvido por: <span class="font-bold text-blue-900">Fabrício Luna</span> - Turma 8</p>
+        <p class="text-xs text-slate-400">Faculdade Medicina do Sertão (FMS) | Apoio ao Raciocínio Clínico (HM2 / UCV)</p>
+    </footer>
+
     <script>
-        // Lógica de Cálculo NEWS2
         const form = document.getElementById('news2-form');
         const inputs = form.querySelectorAll('input, select');
         
@@ -128,7 +147,11 @@
         });
 
         function calculateNews2() {
-            // Pegando valores
+            // Perfil
+            const idade = parseFloat(document.getElementById('idade').value);
+            const gestante = document.getElementById('gestante').value;
+
+            // Parâmetros
             const rr = parseFloat(document.getElementById('resp-rate').value);
             const scale = document.getElementById('spo2-scale').value;
             const spo2 = parseFloat(document.getElementById('spo2').value);
@@ -138,8 +161,32 @@
             const cvpu = document.getElementById('consciousness').value;
             const temp = parseFloat(document.getElementById('temp').value);
 
+            const scoreDiv = document.getElementById('total-score');
+            const riskDiv = document.getElementById('risk-level');
+            const respDiv = document.getElementById('clinical-response');
+            const card = document.getElementById('result-card');
+
+            // TRAVAS DE SEGURANÇA (PEWS e MEOWS)
+            if (!isNaN(idade) && idade < 16) {
+                scoreDiv.innerText = '🏍️';
+                riskDiv.innerText = 'MODO PEWS REQUERIDO';
+                riskDiv.className = 'text-lg font-bold uppercase tracking-wider text-purple-700 mb-2';
+                respDiv.innerHTML = '<strong>Aviso de Segurança:</strong> O NEWS2 não é validado para menores de 16 anos. Aplique o <em>Pediatric Early Warning Score (PEWS)</em>.';
+                card.className = "rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-colors duration-500 bg-purple-100 border-2 border-purple-500";
+                return;
+            }
+
+            if (gestante === 'sim') {
+                scoreDiv.innerText = '🚛';
+                riskDiv.innerText = 'MODO MEOWS REQUERIDO';
+                riskDiv.className = 'text-lg font-bold uppercase tracking-wider text-pink-700 mb-2';
+                respDiv.innerHTML = '<strong>Aviso de Segurança:</strong> A fisiologia da gestação altera os parâmetros basais (ex: taquicardia e hipervolemia). Aplique o <em>Maternal Early Warning Score (MEOWS)</em>.';
+                card.className = "rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-colors duration-500 bg-pink-100 border-2 border-pink-500";
+                return;
+            }
+
             let total = 0;
-            let maxParam = 0; // Para rastrear se algum parâmetro tirou nota 3 (Red Score individual)
+            let maxParam = 0; 
             let isComplete = true;
 
             const checkMax = (val) => {
@@ -149,11 +196,8 @@
 
             // RR
             if (isNaN(rr)) isComplete = false;
-            else if (rr <= 8 || rr >= 25) total += checkMax(3);
-            else if (rr >= 21 || rr == 9 || rr == 10 || rr == 11) total += checkMax(1); 
-            // Note: RR 9-11 is 1, 12-20 is 0, 21-24 is 2. Adjusting logic exactly to table:
-            let rrScore = 0;
-            if(!isNaN(rr)){
+            else {
+                let rrScore = 0;
                 if(rr <= 8) rrScore = 3;
                 else if(rr >= 9 && rr <= 11) rrScore = 1;
                 else if(rr >= 12 && rr <= 20) rrScore = 0;
@@ -172,7 +216,6 @@
                     else if (spo2 >= 94 && spo2 <= 95) spo2Score = 1;
                     else spo2Score = 0;
                 } else {
-                    // Escala 2
                     if (spo2 <= 83) spo2Score = 3;
                     else if (spo2 >= 84 && spo2 <= 85) spo2Score = 2;
                     else if (spo2 >= 86 && spo2 <= 87) spo2Score = 1;
@@ -232,26 +275,17 @@
                 total += checkMax(tempScore);
             }
 
-            updateUI(isComplete, total, maxParam);
-        }
-
-        function updateUI(isComplete, total, maxParam) {
-            const scoreDiv = document.getElementById('total-score');
-            const riskDiv = document.getElementById('risk-level');
-            const respDiv = document.getElementById('clinical-response');
-            const card = document.getElementById('result-card');
-
-            if (!isComplete) {
+            // Verifica se a idade também foi preenchida para liberar o resultado
+            if (!isComplete || isNaN(idade)) {
                 scoreDiv.innerText = '-';
                 riskDiv.innerText = 'Aguardando dados...';
-                respDiv.innerText = 'Preencha todos os parâmetros ao lado para gerar a resposta clínica recomendada.';
+                respDiv.innerText = 'Preencha o perfil e todos os parâmetros ao lado para gerar a resposta clínica.';
                 card.className = "glass rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-colors duration-500 bg-white";
                 return;
             }
 
             scoreDiv.innerText = total;
 
-            // Determinar Risco e Cor
             if (total >= 7) {
                 card.className = "rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-center transition-colors duration-500 bg-red-100 border-2 border-red-500";
                 riskDiv.innerText = 'RISCO ALTO';
